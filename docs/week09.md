@@ -226,4 +226,4 @@ Opt-in проверка требует успешного setup, пополне�
 - `week09-05-escrow-isolation.png`: escrow остался Funded с прежней суммой.
 - `week09-06-tests.png`: результаты unit/local/Devnet suites с явным указанием сети.
 
-Не помещайте keypair, seed-фразы, RPC API-ключи и `.anchor/` в Git. Ссылка на отдельный коммит недели 9 появится в [WEEKLY_COMMITS.md](../WEEKLY_COMMITS.md) после завершения проверки и подтверждённого push. Недели 10–12 не выполняются автоматически.
+Не помещайте keypair, seed-фразы, RPC API-ключи и `.anchor/` в Git. Ссылка на опубликованный коммит недели 9 сохранена в [WEEKLY_COMMITS.md](../WEEKLY_COMMITS.md). Недели 10–12 не выполняются автоматически.
