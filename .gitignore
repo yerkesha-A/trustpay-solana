@@ -147,3 +147,12 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Solana / Anchor secrets and build outputs
+target/
+.anchor/
+test-ledger/
+.tooling/
+*keypair*.json
+id.json
+.DS_Store

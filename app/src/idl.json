@@ -1,0 +1,497 @@
+{
+  "address": "ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A",
+  "metadata": {
+    "name": "trustpay",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "instructions": [
+    {
+      "name": "allow_cancel",
+      "discriminator": [
+        214,
+        126,
+        16,
+        51,
+        6,
+        0,
+        41,
+        208
+      ],
+      "accounts": [
+        {
+          "name": "freelancer",
+          "signer": true,
+          "relations": [
+            "order"
+          ]
+        },
+        {
+          "name": "order",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111,
+                  114,
+                  100,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "order.client",
+                "account": "Order"
+              },
+              {
+                "kind": "account",
+                "path": "order.id",
+                "account": "Order"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_order",
+      "discriminator": [
+        141,
+        54,
+        37,
+        207,
+        237,
+        210,
+        250,
+        215
+      ],
+      "accounts": [
+        {
+          "name": "client",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "freelancer"
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "order",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111,
+                  114,
+                  100,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "client"
+              },
+              {
+                "kind": "arg",
+                "path": "id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "order"
+              }
+            ]
+          }
+        },
+        {
+          "name": "source",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "id",
+          "type": "u64"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "refund",
+      "discriminator": [
+        2,
+        96,
+        183,
+        251,
+        63,
+        208,
+        46,
+        46
+      ],
+      "accounts": [
+        {
+          "name": "client",
+          "signer": true,
+          "relations": [
+            "order"
+          ]
+        },
+        {
+          "name": "order",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111,
+                  114,
+                  100,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "order.client",
+                "account": "Order"
+              },
+              {
+                "kind": "account",
+                "path": "order.id",
+                "account": "Order"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "relations": [
+            "order"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "order"
+              }
+            ]
+          }
+        },
+        {
+          "name": "destination",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "release",
+      "discriminator": [
+        253,
+        249,
+        15,
+        206,
+        28,
+        127,
+        193,
+        241
+      ],
+      "accounts": [
+        {
+          "name": "client",
+          "signer": true,
+          "relations": [
+            "order"
+          ]
+        },
+        {
+          "name": "order",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111,
+                  114,
+                  100,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "order.client",
+                "account": "Order"
+              },
+              {
+                "kind": "account",
+                "path": "order.id",
+                "account": "Order"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "relations": [
+            "order"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "order"
+              }
+            ]
+          }
+        },
+        {
+          "name": "destination",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "submit_work",
+      "discriminator": [
+        158,
+        80,
+        101,
+        51,
+        114,
+        130,
+        101,
+        253
+      ],
+      "accounts": [
+        {
+          "name": "freelancer",
+          "signer": true,
+          "relations": [
+            "order"
+          ]
+        },
+        {
+          "name": "order",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111,
+                  114,
+                  100,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "order.client",
+                "account": "Order"
+              },
+              {
+                "kind": "account",
+                "path": "order.id",
+                "account": "Order"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Order",
+      "discriminator": [
+        134,
+        173,
+        223,
+        185,
+        77,
+        86,
+        28,
+        51
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidAmount",
+      "msg": "Amount must be greater than zero"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidTitle",
+      "msg": "Title must contain 1–120 UTF-8 bytes"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidParty",
+      "msg": "Client and freelancer must be distinct valid identities"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidStatus",
+      "msg": "Operation is not permitted in the current order status"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidRecipient",
+      "msg": "Incorrect token recipient"
+    }
+  ],
+  "types": [
+    {
+      "name": "Order",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "client",
+            "type": "pubkey"
+          },
+          {
+            "name": "freelancer",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "Status"
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Status",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Funded"
+          },
+          {
+            "name": "Submitted"
+          },
+          {
+            "name": "CancelApproved"
+          },
+          {
+            "name": "Paid"
+          },
+          {
+            "name": "Refunded"
+          }
+        ]
+      }
+    }
+  ]
+}
