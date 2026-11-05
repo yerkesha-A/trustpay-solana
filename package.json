@@ -9,10 +9,17 @@
     "test": "ts-mocha -p tsconfig.json -t 1000000 tests/**/*.ts",
     "test:chain": "anchor test",
     "sync:idl": "node scripts/sync-idl.mjs",
-    "test:browser": "node tests/browser.mjs"
+    "test:browser": "node tests/browser.mjs",
+    "defi:setup": "ts-node -P tsconfig.json scripts/week09-setup.ts",
+    "test:defi": "ts-mocha -p tsconfig.json tests/defi-math.ts",
+    "test:defi:devnet": "TRUSTPAY_DEFI_DEVNET=1 ts-mocha -p tsconfig.json -t 240000 tests/defi-devnet.ts",
+    "test:defi:local": "TRUSTPAY_DEFI_LOCAL=1 ts-mocha -p tsconfig.json -t 180000 tests/defi-local.ts",
+    "test:defi:browser": "node tests/browser-defi.mjs",
+    "test:defi:browser:transactions": "TRUSTPAY_DEFI_BROWSER=1 node tests/browser-defi-transactions.mjs"
   },
   "dependencies": {
     "@coral-xyz/anchor": "0.31.1",
+    "@raydium-io/raydium-sdk-v2": "0.2.81-alpha",
     "@solana/spl-token": "0.4.14",
     "@solana/web3.js": "1.98.4",
     "bn.js": "5.2.2"
@@ -25,6 +32,7 @@
     "mocha": "^11.7.0",
     "playwright": "1.64.1",
     "ts-mocha": "^11.1.0",
+    "ts-node": "10.9.2",
     "typescript": "~5.8.3"
   },
   "engines": {

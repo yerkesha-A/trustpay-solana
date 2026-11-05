@@ -6,7 +6,8 @@
     "module": "commonjs",
     "target": "es2022",
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "skipLibCheck": true
   },
-  "include": ["tests/**/*.ts"]
+  "include": ["tests/**/*.ts", "shared/**/*.ts", "scripts/week09-setup.ts"]
 }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import {
@@ -29,6 +29,7 @@ import {
 } from "./chain";
 import { getMint } from "@solana/spl-token";
 import type { ConfirmedSignatureInfo } from "@solana/web3.js";
+const DeFiPanel = lazy(() => import("./DeFiPanel"));
 const labels: Record<string, string> = {
   funded: "В работе",
   submitted: "На проверке",
@@ -38,6 +39,7 @@ const labels: Record<string, string> = {
 };
 export default function App() {
   const wallet = useAnchorWallet();
+  const [view, setView] = useState<"projects" | "defi">("projects");
   const [role, setRole] = useState<"client" | "freelancer">("client"),
     [orders, setOrders] = useState<Order[]>([]),
     [decimals, setDecimals] = useState<Record<string, number>>({});
@@ -175,13 +177,20 @@ export default function App() {
         </a>
         <div className="workspace">WORKSPACE</div>
         <button
-          className="nav active"
+          className={view === "projects" ? "nav active" : "nav"}
           onClick={() => {
+            setView("projects");
             setDetail(null);
             setTab("Все заказы");
           }}
         >
           <LayoutDashboard size={19} /> Обзор проектов <span>↗</span>
+        </button>
+        <button
+          className={view === "defi" ? "nav active" : "nav"}
+          onClick={() => setView("defi")}
+        >
+          <ArrowUpRight size={19} /> DeFi · Raydium <span>↗</span>
         </button>
         <div className="sidebar-bottom">
           <div className="security">
@@ -200,7 +209,8 @@ export default function App() {
       <main>
         <header>
           <div className="breadcrumb">
-            Workspace <span>/</span> Обзор проектов
+            Workspace <span>/</span>{" "}
+            {view === "defi" ? "DeFi · Raydium" : "Обзор проектов"}
           </div>
           <div className="header-actions">
             <button
@@ -214,229 +224,244 @@ export default function App() {
           </div>
         </header>
         <div className="content">
-          <div className="intro">
-            <div>
-              <div className="eyebrow">ПЛАТЕЖИ БЕЗ ЛИШНИХ РИСКОВ</div>
-              <h1>
-                Ваша работа. Под защитой<span>.</span>
-              </h1>
-              <p>Управляйте проектами и безопасно оплачивайте результат.</p>
-            </div>
-            <button
-              className="primary"
-              disabled={!wallet || !configured || busy}
-              onClick={() => setModal(true)}
-            >
-              <Plus size={18} />
-              Создать заказ
-            </button>
+          <div className="mobile-sections">
+            <button onClick={() => setView("projects")}>Проекты</button>
+            <button onClick={() => setView("defi")}>DeFi · Raydium</button>
           </div>
-          <div className="role-switch">
-            <button
-              className={role === "client" ? "selected" : ""}
-              onClick={() => setRole("client")}
-            >
-              Я заказчик
-            </button>
-            <button
-              className={role === "freelancer" ? "selected" : ""}
-              onClick={() => setRole("freelancer")}
-            >
-              Я исполнитель
-            </button>
-            <span>
-              <ShieldCheck size={14} /> Только тестовые средства
-            </span>
-          </div>
-          <section className="stats">
-            <div>
-              <span className="stat-icon">
-                <LayoutDashboard size={20} />
-              </span>
-              <p>Всего проектов</p>
-              <strong>{visible.length.toString().padStart(2, "0")}</strong>
-              <small>В выбранной роли</small>
-            </div>
-            <div>
-              <span className="stat-icon amber">
-                <LockKeyhole size={20} />
-              </span>
-              <p>Активные escrow</p>
-              <strong>{active.length.toString().padStart(2, "0")}</strong>
-              <small>Средства под защитой контракта</small>
-            </div>
-            <div>
-              <span className="stat-icon blue">
-                <CircleCheck size={20} />
-              </span>
-              <p>Завершённые проекты</p>
-              <strong>
-                {visible
-                  .filter((o) => "paid" in o.account.status)
-                  .length.toString()
-                  .padStart(2, "0")}
-              </strong>
-              <small>Результат принят и оплачен</small>
-            </div>
-          </section>
-          <section className="projects">
-            <div className="section-heading">
-              <div>
-                <h2>
-                  Мои проекты <span>{visible.length}</span>
-                </h2>
-                <p>От первого брифа до последней выплаты.</p>
-              </div>
-              <button
-                className="secondary"
-                disabled={loading || busy || !wallet || !configured}
-                onClick={() => void refresh()}
-              >
-                <RefreshCw size={15} className={loading ? "spin" : ""} />{" "}
-                Обновить
-              </button>
-            </div>
-            <div className="tabs">
-              {["Все заказы", "Активные", "Завершённые"].map((t) => (
+          {view === "defi" ? (
+            <Suspense fallback={<p>Загрузка DeFi…</p>}>
+              <DeFiPanel key={wallet?.publicKey.toBase58() || "disconnected"} />
+            </Suspense>
+          ) : (
+            <>
+              <div className="intro">
+                <div>
+                  <div className="eyebrow">ПЛАТЕЖИ БЕЗ ЛИШНИХ РИСКОВ</div>
+                  <h1>
+                    Ваша работа. Под защитой<span>.</span>
+                  </h1>
+                  <p>Управляйте проектами и безопасно оплачивайте результат.</p>
+                </div>
                 <button
-                  key={t}
-                  className={tab === t ? "selected" : ""}
-                  onClick={() => setTab(t)}
+                  className="primary"
+                  disabled={!wallet || !configured || busy}
+                  onClick={() => setModal(true)}
                 >
-                  {t}
+                  <Plus size={18} />
+                  Создать заказ
                 </button>
-              ))}
-            </div>
-            {!configured && (
-              <div className="setup">
-                Программа ещё не настроена. Выполните anchor build, anchor keys
-                sync, npm run sync:idl и укажите program ID в app/.env.local.
               </div>
-            )}
-            {error && (
-              <div className="error" role="alert">
-                {error}
+              <div className="role-switch">
+                <button
+                  className={role === "client" ? "selected" : ""}
+                  onClick={() => setRole("client")}
+                >
+                  Я заказчик
+                </button>
+                <button
+                  className={role === "freelancer" ? "selected" : ""}
+                  onClick={() => setRole("freelancer")}
+                >
+                  Я исполнитель
+                </button>
+                <span>
+                  <ShieldCheck size={14} /> Только тестовые средства
+                </span>
               </div>
-            )}
-            {notice && (
-              <div className="notice" role="status">
-                {notice}
-              </div>
-            )}
-            {signature && (
-              <a
-                className="tx"
-                target="_blank"
-                rel="noreferrer"
-                href={explorer(signature)}
-              >
-                Транзакция: {short(signature)} <ExternalLink size={14} />
-              </a>
-            )}
-            {loading ? (
-              <div className="empty">Загрузка данных из Solana…</div>
-            ) : filtered.length === 0 ? (
-              <div className="empty">
-                <div className="empty-icon">
-                  <Wallet size={29} />
-                  <span>
-                    <ShieldCheck size={16} />
+              <section className="stats">
+                <div>
+                  <span className="stat-icon">
+                    <LayoutDashboard size={20} />
                   </span>
+                  <p>Всего проектов</p>
+                  <strong>{visible.length.toString().padStart(2, "0")}</strong>
+                  <small>В выбранной роли</small>
                 </div>
-                <h3>
-                  {wallet
-                    ? "Здесь начнётся ваш следующий проект"
-                    : "Хорошие проекты начинаются с доверия"}
-                </h3>
-                <p>
-                  {wallet
-                    ? "В выбранной категории пока нет заказов. Создайте первый escrow-заказ."
-                    : "Подключите Phantom, чтобы увидеть свои заказы и начать безопасную работу."}
-                </p>
-                {!wallet ? (
-                  <WalletMultiButton />
-                ) : (
+                <div>
+                  <span className="stat-icon amber">
+                    <LockKeyhole size={20} />
+                  </span>
+                  <p>Активные escrow</p>
+                  <strong>{active.length.toString().padStart(2, "0")}</strong>
+                  <small>Средства под защитой контракта</small>
+                </div>
+                <div>
+                  <span className="stat-icon blue">
+                    <CircleCheck size={20} />
+                  </span>
+                  <p>Завершённые проекты</p>
+                  <strong>
+                    {visible
+                      .filter((o) => "paid" in o.account.status)
+                      .length.toString()
+                      .padStart(2, "0")}
+                  </strong>
+                  <small>Результат принят и оплачен</small>
+                </div>
+              </section>
+              <section className="projects">
+                <div className="section-heading">
+                  <div>
+                    <h2>
+                      Мои проекты <span>{visible.length}</span>
+                    </h2>
+                    <p>От первого брифа до последней выплаты.</p>
+                  </div>
                   <button
-                    className="primary"
-                    disabled={!configured || busy}
-                    onClick={() => setModal(true)}
+                    className="secondary"
+                    disabled={loading || busy || !wallet || !configured}
+                    onClick={() => void refresh()}
                   >
-                    <Plus size={17} />
-                    Создать первый заказ
+                    <RefreshCw size={15} className={loading ? "spin" : ""} />{" "}
+                    Обновить
                   </button>
+                </div>
+                <div className="tabs">
+                  {["Все заказы", "Активные", "Завершённые"].map((t) => (
+                    <button
+                      key={t}
+                      className={tab === t ? "selected" : ""}
+                      onClick={() => setTab(t)}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
+                {!configured && (
+                  <div className="setup">
+                    Программа ещё не настроена. Выполните anchor build, anchor
+                    keys sync, npm run sync:idl и укажите program ID в
+                    app/.env.local.
+                  </div>
                 )}
-                <small>
-                  <LockKeyhole size={12} /> Реальные данные сети. Никаких
-                  демонстрационных платежей.
-                </small>
-              </div>
-            ) : (
-              <div className="order-list">
-                {filtered.map((o) => (
-                  <button
-                    className="order-row"
-                    key={o.publicKey.toBase58()}
-                    onClick={() => setDetail(o)}
+                {error && (
+                  <div className="error" role="alert">
+                    {error}
+                  </div>
+                )}
+                {notice && (
+                  <div className="notice" role="status">
+                    {notice}
+                  </div>
+                )}
+                {signature && (
+                  <a
+                    className="tx"
+                    target="_blank"
+                    rel="noreferrer"
+                    href={explorer(signature)}
                   >
-                    <span className="project-icon">
-                      {o.account.title.slice(0, 1).toUpperCase()}
-                    </span>
-                    <span>
-                      <strong>{o.account.title}</strong>
-                      <small>
-                        #{o.account.id.toString()} ·{" "}
-                        {short(
-                          o.account[
-                            role === "client" ? "freelancer" : "client"
-                          ].toBase58(),
-                        )}
-                      </small>
-                    </span>
-                    <span className="badge">
-                      {labels[Object.keys(o.account.status)[0]]}
-                    </span>
-                    <span className="money">
-                      {amount(o)}
-                      <small>{short(o.account.mint.toBase58())}</small>
-                    </span>
-                    <ArrowUpRight size={18} />
-                  </button>
-                ))}
-              </div>
-            )}
-          </section>
-          <section className="how">
-            <div>
-              <span className="eyebrow">ПРОСТОЙ ПУТЬ К РЕЗУЛЬТАТУ</span>
-              <h2>Доверие встроено в каждый шаг.</h2>
-              <p>Вы договариваетесь о работе. Смарт-контракт хранит оплату.</p>
-            </div>
-            <div className="steps">
-              {[
-                [
-                  "01",
-                  "Создайте заказ",
-                  "Укажите исполнителя и внесите тестовые токены.",
-                ],
-                [
-                  "02",
-                  "Получите результат",
-                  "Исполнитель отправляет работу на проверку.",
-                ],
-                [
-                  "03",
-                  "Подтвердите выплату",
-                  "После вашего одобрения токены получает исполнитель.",
-                ],
-              ].map(([n, t, d]) => (
-                <div key={n}>
-                  <span>{n}</span>
-                  <strong>{t}</strong>
-                  <p>{d}</p>
+                    Транзакция: {short(signature)} <ExternalLink size={14} />
+                  </a>
+                )}
+                {loading ? (
+                  <div className="empty">Загрузка данных из Solana…</div>
+                ) : filtered.length === 0 ? (
+                  <div className="empty">
+                    <div className="empty-icon">
+                      <Wallet size={29} />
+                      <span>
+                        <ShieldCheck size={16} />
+                      </span>
+                    </div>
+                    <h3>
+                      {wallet
+                        ? "Здесь начнётся ваш следующий проект"
+                        : "Хорошие проекты начинаются с доверия"}
+                    </h3>
+                    <p>
+                      {wallet
+                        ? "В выбранной категории пока нет заказов. Создайте первый escrow-заказ."
+                        : "Подключите Phantom, чтобы увидеть свои заказы и начать безопасную работу."}
+                    </p>
+                    {!wallet ? (
+                      <WalletMultiButton />
+                    ) : (
+                      <button
+                        className="primary"
+                        disabled={!configured || busy}
+                        onClick={() => setModal(true)}
+                      >
+                        <Plus size={17} />
+                        Создать первый заказ
+                      </button>
+                    )}
+                    <small>
+                      <LockKeyhole size={12} /> Реальные данные сети. Никаких
+                      демонстрационных платежей.
+                    </small>
+                  </div>
+                ) : (
+                  <div className="order-list">
+                    {filtered.map((o) => (
+                      <button
+                        className="order-row"
+                        key={o.publicKey.toBase58()}
+                        onClick={() => setDetail(o)}
+                      >
+                        <span className="project-icon">
+                          {o.account.title.slice(0, 1).toUpperCase()}
+                        </span>
+                        <span>
+                          <strong>{o.account.title}</strong>
+                          <small>
+                            #{o.account.id.toString()} ·{" "}
+                            {short(
+                              o.account[
+                                role === "client" ? "freelancer" : "client"
+                              ].toBase58(),
+                            )}
+                          </small>
+                        </span>
+                        <span className="badge">
+                          {labels[Object.keys(o.account.status)[0]]}
+                        </span>
+                        <span className="money">
+                          {amount(o)}
+                          <small>{short(o.account.mint.toBase58())}</small>
+                        </span>
+                        <ArrowUpRight size={18} />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </section>
+              <section className="how">
+                <div>
+                  <span className="eyebrow">ПРОСТОЙ ПУТЬ К РЕЗУЛЬТАТУ</span>
+                  <h2>Доверие встроено в каждый шаг.</h2>
+                  <p>
+                    Вы договариваетесь о работе. Смарт-контракт хранит оплату.
+                  </p>
                 </div>
-              ))}
-            </div>
-          </section>
+                <div className="steps">
+                  {[
+                    [
+                      "01",
+                      "Создайте заказ",
+                      "Укажите исполнителя и внесите тестовые токены.",
+                    ],
+                    [
+                      "02",
+                      "Получите результат",
+                      "Исполнитель отправляет работу на проверку.",
+                    ],
+                    [
+                      "03",
+                      "Подтвердите выплату",
+                      "После вашего одобрения токены получает исполнитель.",
+                    ],
+                  ].map(([n, t, d]) => (
+                    <div key={n}>
+                      <span>{n}</span>
+                      <strong>{t}</strong>
+                      <p>{d}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </>
+          )}
           <footer>
             <span>© TrustPay · University Blockchain Project</span>
             <span>

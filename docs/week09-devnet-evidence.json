@@ -1,0 +1,70 @@
+{
+  "network": "devnet",
+  "genesis": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "program": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+  "pool": "8biZWzVLXx9AC5N2c3mJjbeGLGMRJzuDksCSibnvHsB3",
+  "mintA": "2CLKeMqA9MJxitEwYZi1bXmQx14QXS3gCm5xSHSs5SDf",
+  "mintB": "2pybmyQorJG1CvyZ8eZMKgUca9BGAkze1MzQx6fR81wW",
+  "lpMint": "8Y3E8fiUiN7ZZ7YVLSF2WYN2YcdFVU5PYLHR3X7dHi5P",
+  "createSignature": "2WdAMMgTrKV4PBBeZXZV9NRiwBcVTE9mEcYxdm9QG9dZUpvK7gA65u36cjEujeW5NJPbwMA517WoDwbTj24FoK2H",
+  "integration": [
+    {
+      "operation": "deposit",
+      "signature": "3dtTMz3k49g3junVZhdpQQsuTtHDvZ6spMYtJZCJ7xmQ2Xwi3faHhxRN3NwRqG6KgjdLwL1H1bBoBVmQDb5xTUMo",
+      "before": ["9000000000", "9000000000", "999999900"],
+      "after": ["8990000000", "8990000000", "1009999900"]
+    },
+    {
+      "operation": "withdraw",
+      "signature": "2hvJzsnL31AHaTmEZYRSsiQFAq3ZUdJs7EDKm3QRWnkp51yLNQEPE1aoDopJsNngGVGD9pQtrok87NyuJVUzKY57",
+      "before": ["8990000000", "8990000000", "1009999900"],
+      "after": ["8995000000", "8995000000", "1004999900"]
+    }
+  ],
+  "browser": [
+    {
+      "operation": "browser-deposit",
+      "url": "https://explorer.solana.com/tx/4e47xNXHoirhYy8Qmv1ArTHBmFP9Ed9qSqmLkYuS5qnYu9yPu5JmCb7FtQqdh8J25RPFSXSyFudW5zEGzjMi1rmP?cluster=devnet",
+      "lpBefore": "1005499900",
+      "lpAfter": "1006499900"
+    },
+    {
+      "operation": "browser-withdraw",
+      "url": "https://explorer.solana.com/tx/49Y8qSP22PHQYhZYMUbi9kG6HNHsSSEng8BFZvrXqJE5th6RD3TnncXNggYmWzfuccMU8AFovtN4KKQCkgJZCGnY?cluster=devnet",
+      "lpBefore": "1006499900",
+      "lpAfter": "1005999900"
+    }
+  ],
+  "verification": [
+    {
+      "signature": "2WdAMMgTrKV4PBBeZXZV9NRiwBcVTE9mEcYxdm9QG9dZUpvK7gA65u36cjEujeW5NJPbwMA517WoDwbTj24FoK2H",
+      "confirmationStatus": "finalized",
+      "slot": 519000508,
+      "err": null
+    },
+    {
+      "signature": "3dtTMz3k49g3junVZhdpQQsuTtHDvZ6spMYtJZCJ7xmQ2Xwi3faHhxRN3NwRqG6KgjdLwL1H1bBoBVmQDb5xTUMo",
+      "confirmationStatus": "finalized",
+      "slot": 519000556,
+      "err": null
+    },
+    {
+      "signature": "2hvJzsnL31AHaTmEZYRSsiQFAq3ZUdJs7EDKm3QRWnkp51yLNQEPE1aoDopJsNngGVGD9pQtrok87NyuJVUzKY57",
+      "confirmationStatus": "finalized",
+      "slot": 519000566,
+      "err": null
+    },
+    {
+      "signature": "4e47xNXHoirhYy8Qmv1ArTHBmFP9Ed9qSqmLkYuS5qnYu9yPu5JmCb7FtQqdh8J25RPFSXSyFudW5zEGzjMi1rmP",
+      "confirmationStatus": "finalized",
+      "slot": 519001360,
+      "err": null
+    },
+    {
+      "signature": "49Y8qSP22PHQYhZYMUbi9kG6HNHsSSEng8BFZvrXqJE5th6RD3TnncXNggYmWzfuccMU8AFovtN4KKQCkgJZCGnY",
+      "confirmationStatus": "finalized",
+      "slot": 519001376,
+      "err": null
+    }
+  ]
+}

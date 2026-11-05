@@ -828,3 +828,197 @@ footer span:last-child {
 .history li span {
   color: var(--muted);
 }
+.nav:not(.active) {
+  background: transparent;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.mobile-sections {
+  display: none;
+}
+.defi-network {
+  padding: 10px 14px;
+  border-radius: 20px;
+  background: var(--soft);
+  color: var(--green);
+  font-size: 11px;
+  white-space: nowrap;
+}
+.defi-boundary {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 20px;
+  margin: 28px 0;
+  background: var(--soft);
+  border-radius: 12px;
+  color: var(--green);
+}
+.defi-boundary strong {
+  font-size: 12px;
+}
+.defi-boundary p {
+  font-size: 11px;
+  margin: 5px 0;
+}
+.defi-card .section-heading h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.defi-card .section-heading > a {
+  display: flex;
+  gap: 5px;
+  font-size: 10px;
+}
+.pool-form,
+.liquidity-form {
+  display: flex;
+  gap: 15px;
+  align-items: end;
+  padding: 20px 25px;
+  border-top: 1px solid var(--line);
+}
+.pool-form label {
+  flex: 1;
+}
+.defi label {
+  font-size: 11px;
+  font-weight: 700;
+}
+.defi input:not([type="checkbox"]) {
+  width: 100%;
+  display: block;
+  margin-top: 8px;
+  padding: 12px;
+  background: var(--paper);
+  color: inherit;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+.defi-pool {
+  padding: 25px;
+  border-top: 1px solid var(--line);
+}
+.defi-pool > a {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+}
+.defi-assets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 22px;
+}
+.defi-assets > div {
+  padding: 17px;
+  background: var(--soft);
+  border-radius: 9px;
+}
+.defi-assets strong {
+  font-size: 12px;
+}
+.defi-assets a {
+  display: block;
+  font-size: 9px;
+  overflow-wrap: anywhere;
+  margin: 10px 0;
+  text-decoration: underline;
+}
+.defi-assets small {
+  font-size: 10px;
+  color: var(--muted);
+}
+.defi-assets p {
+  font-size: 10px;
+}
+.defi-connect {
+  padding: 0 25px 25px;
+}
+.liquidity-form label {
+  flex: 1;
+}
+.defi-quote {
+  padding: 25px;
+  border-top: 1px solid var(--line);
+  background: var(--soft);
+}
+.defi-quote h3 {
+  font-size: 14px;
+}
+.defi-quote dl {
+  font-size: 11px;
+}
+.defi-quote dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+.defi-quote dd {
+  margin: 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.defi-quote p {
+  font-size: 10px;
+}
+.defi-quote .consent {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  font-size: 10px;
+  line-height: 1.8;
+  margin: 20px 0;
+}
+.defi-quote .consent input {
+  margin-top: 3px;
+}
+.defi-footnote {
+  font-size: 10px;
+  max-width: 700px;
+}
+.defi .intro h1 {
+  font-size: 28px;
+}
+@media (max-width: 760px) {
+  .mobile-sections {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+  .mobile-sections button {
+    background: var(--soft);
+    color: var(--green);
+    padding: 10px 16px;
+    border-radius: 7px;
+    font-size: 11px;
+  }
+  .pool-form,
+  .liquidity-form {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px;
+  }
+  .defi-assets {
+    grid-template-columns: 1fr;
+  }
+  .defi-pool,
+  .defi-quote {
+    padding: 18px;
+  }
+  .defi .intro h1 {
+    font-size: 25px;
+  }
+  .defi-quote dl > div {
+    display: block;
+  }
+  .defi-quote dd {
+    margin: 8px 0;
+  }
+  .defi-boundary {
+    align-items: start;
+  }
+}
