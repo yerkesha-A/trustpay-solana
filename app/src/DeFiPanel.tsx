@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SwapPanel from "./SwapPanel";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { utils } from "@coral-xyz/anchor";
@@ -453,6 +454,7 @@ export default function DeFiPanel() {
           </>
         )}
       </section>
+      <SwapPanel connection={connection} />
       <p className="defi-footnote">
         APR не рассчитывается: данных для подтверждённой оценки доходности нет.
         Депозит LP не гарантирует прибыль. Только тестовые токены, без Mainnet.

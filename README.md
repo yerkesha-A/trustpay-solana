@@ -8,6 +8,7 @@ Escrow-платежи на Solana. Anchor, React, TypeScript и Phantom.
 - Депозит и вывод ликвидности Raydium CPMM.
 - Liquidity Vault 1:1 и RPC Dashboard.
 - Расчёты AMM и диапазонов CLMM.
+- Raydium Swap и проверка безопасности vault.
 
 ## Запуск
 
@@ -29,7 +30,9 @@ VITE_PROGRAM_ID=ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A
 ```sh
 npm run build
 npx tsc --noEmit -p tsconfig.json
-anchor test
+npm run test:unit
+npm run build:security
+npm run test:security
 ```
 
 ## Документация
@@ -38,5 +41,6 @@ anchor test
 - [Raydium liquidity](docs/week09.md)
 - [Vault и RPC Dashboard](docs/week10.md)
 - [AMM / CLMM](docs/week11.md)
+- [Swap и Security Lab](docs/week12.md)
 
 Escrow не поддерживает арбитраж и автоматический возврат. Отмена требует согласия исполнителя.

@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-11-07T17:33:27.026Z",
+  "network": "devnet",
+  "owner": "2mxYEEpyuuo1msxRXGB4wWNqeCeaPSrcywcw2Qq7tEab",
+  "limit": 20,
+  "transactions": [
+    {
+      "signature": "5VuPDpWkRiYfLcq5A22WfrAvFBLD2xjH5Yjjrb35KQZRmTzjpymNE8akhnAwCdDBT5b231otvq5rBvsdfA8Gb4Cw",
+      "err": null,
+      "slot": 519736304,
+      "blockTime": 1794072773,
+      "fee": 5000,
+      "hasRaydiumInstruction": true,
+      "ownerSigned": true
+    },
+    {
+      "signature": "1igjW8nNfq59PMntke5tgJbNgHCTbt8Y7j93uUJpMcojVnBNFEtwpjkgQxchVud5YR43RJs21srJR5xCNxWUYsk",
+      "err": null,
+      "slot": 519730152,
+      "blockTime": 1794071300,
+      "fee": 5000,
+      "hasRaydiumInstruction": false,
+      "ownerSigned": false
+    }
+  ],
+  "transactionsSentByCheck": 0
+}
