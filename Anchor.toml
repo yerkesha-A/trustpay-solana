@@ -1,0 +1,23 @@
+[toolchain]
+anchor_version = "0.31.1"
+solana_version = "2.1.0"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.devnet]
+trustpay = "ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A"
+
+[programs.localnet]
+trustpay = "ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "localnet"
+wallet = ".anchor/local-wallet.json"
+
+[scripts]
+test = "npm test"

@@ -1,0 +1,33 @@
+{
+  "name": "trustpay-solana",
+  "private": true,
+  "workspaces": [
+    "app"
+  ],
+  "scripts": {
+    "build": "npm run build -w app",
+    "test": "ts-mocha -p tsconfig.json -t 1000000 tests/**/*.ts",
+    "test:chain": "anchor test",
+    "sync:idl": "node scripts/sync-idl.mjs",
+    "test:browser": "node tests/browser.mjs"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "0.31.1",
+    "@solana/spl-token": "0.4.14",
+    "@solana/web3.js": "1.98.4",
+    "bn.js": "5.2.2"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.1.6",
+    "@types/chai": "^4.3.20",
+    "@types/mocha": "^10.0.10",
+    "chai": "^4.5.0",
+    "mocha": "^11.7.0",
+    "playwright": "1.64.1",
+    "ts-mocha": "^11.1.0",
+    "typescript": "~5.8.3"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}
