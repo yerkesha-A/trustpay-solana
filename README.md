@@ -1,6 +1,6 @@
 # TrustPay — Decentralized Freelance Escrow
 
-Университетский проект на Solana. Реализованы **недели 8–9**: escrow MVP и реальная DeFi-интеграция Raydium CPMM, проверенная на Devnet. Недели 10–12 ожидают отдельного разрешения. Только Localnet / Devnet и тестовые SPL-токены. Mainnet не используется.
+Университетский проект на Solana. Реализованы **недели 8–10**: escrow MVP и реальная DeFi-интеграция Raydium CPMM, проверенная на Devnet. Неделя 10: изолированный Liquidity Vault 1:1 и RPC Dashboard, проверенные реальными Devnet-транзакциями. Недели 11–15 ожидают отдельного разрешения. Только Localnet / Devnet и тестовые SPL-токены. Mainnet не используется.
 
 ## Архитектура
 
@@ -92,7 +92,7 @@ npm run dev -w app
 
 Создайте заказ, переключитесь на исполнителя, сдайте работу, вернитесь к заказчику и подтвердите выплату. Второй заказ используйте для согласованной отмены. Все действия показывают реальную подпись транзакции и обновляют список после подтверждения. В карточке доступна история последних 20 транзакций заказа и ссылки на Explorer. Localnet Explorer требует запущенного локального RPC и доступ браузера к localhost.
 
-Для Devnet задайте `VITE_NETWORK=devnet`, `VITE_RPC_URL=https://api.devnet.solana.com` (или `https://devnet.helius-rpc.com/?api-key=...`), разверните только проверенную программу командой `anchor deploy --provider.cluster devnet` и используйте исключительно devnet mint. Скрипт создания токенов намеренно ограничен localhost. Развёртывание Devnet в рамках текущей работы не выполняется. VITE-переменные публичны, RPC-ключ, включённый в Vite, виден пользователю; ограничивайте его в кабинете провайдера. `.env` не коммитить.
+Для Devnet задайте `VITE_NETWORK=devnet`, `VITE_RPC_URL=https://api.devnet.solana.com` (или `https://devnet.helius-rpc.com/?api-key=...`), разверните только проверенную программу командой `anchor deploy --provider.cluster devnet` и используйте исключительно devnet mint. Скрипт создания токенов намеренно ограничен localhost. В неделе 8 TrustPay проверялся локально; текущий статус Devnet-развёртывания указан в docs/week10.md. VITE-переменные публичны, RPC-ключ, включённый в Vite, виден пользователю; ограничивайте его в кабинете провайдера. `.env` не коммитить.
 
 ## Границы недели 8
 
@@ -127,3 +127,27 @@ npm run test:defi:devnet
 `defi:setup` создаёт отдельный игнорируемый `.anchor/week09-wallet.json`, проверяет настоящий Devnet genesis и наличие программы, затем при наличии тестовых SOL создаёт два новых SPL mint и реальный пул. Если RPC faucet закрыт, пополните **только бесплатными Devnet SOL** напечатанный адрес через официальный faucet. Скрипт не обращается к Mainnet и не использует escrow.
 
 Для интерфейса укажите `VITE_DEFI_POOL_ID` из вывода setup в `app/.env.local`. Не импортируйте CLI keypair в Phantom. Публичный mint/пул можно использовать с отдельным Phantom-кошельком; тестовые токены должны находиться в его собственных ATA. Полные инструкции, локальный тест оригинального Raydium bytecode, реальные результаты и ограничения: [docs/week09.md](docs/week09.md).
+
+## Неделя 10 — изолированный Liquidity Vault и RPC Dashboard
+
+По согласованной архитектуре добавлен отдельный idle Vault на SPL mint, со своими PDA reserve и SPL share mint. Депозит выпускает shares 1:1 через CPI, вывод сжигает собственные shares и переводит underlying с подписью PDA. Это не escrow и не LP Raydium. Старые программы/вкладки сохранены.
+
+Dashboard читает настоящие SOL/SPL-балансы, Vault reserve и shares, заказы/статусы, ограниченную историю и program activity. Есть Devnet/localnet, Helius через игнорируемый env, timeout/retry/rate-limit handling и обновление после подтверждения.
+
+```sh
+anchor build
+npm run sync:idl
+npm run test:rpc
+anchor test --skip-build
+npm run build
+```
+
+Для новых Devnet-проверок используются существующие `.anchor/week09-wallet.json` и `target/deploy/trustpay-keypair.json`: не запускайте keygen и не перезаписывайте ключи. Развёртывание сначала проверяет достаточность бесплатных Devnet SOL.
+
+```sh
+npm run deploy:week10:devnet
+npm run test:vault:devnet
+npm run test:dashboard:devnet
+```
+
+Нужен работающий Vite для браузерных тестов. Локальный UI-тест: `npm run test:dashboard:local` после local-validator contract suite. Все команды, реальные результаты и ограничения: [docs/week10.md](docs/week10.md). Push недели 10 — только после отдельного подтверждения пользователя.

@@ -29,6 +29,8 @@ import {
 } from "./chain";
 import { getMint } from "@solana/spl-token";
 import type { ConfirmedSignatureInfo } from "@solana/web3.js";
+import RpcSectionBoundary from "./RpcSectionBoundary";
+const RpcDashboard = lazy(() => import("./RpcDashboard"));
 const DeFiPanel = lazy(() => import("./DeFiPanel"));
 const labels: Record<string, string> = {
   funded: "В работе",
@@ -39,7 +41,9 @@ const labels: Record<string, string> = {
 };
 export default function App() {
   const wallet = useAnchorWallet();
-  const [view, setView] = useState<"projects" | "defi">("projects");
+  const [view, setView] = useState<"projects" | "defi" | "dashboard">(
+    "projects",
+  );
   const [role, setRole] = useState<"client" | "freelancer">("client"),
     [orders, setOrders] = useState<Order[]>([]),
     [decimals, setDecimals] = useState<Record<string, number>>({});
@@ -134,6 +138,11 @@ export default function App() {
       setSignature(sig);
       setNotice("Транзакция отправлена. Ожидаем подтверждения…");
       await confirm(sig);
+      window.dispatchEvent(
+        new CustomEvent("trustpay:transaction-confirmed", {
+          detail: { network, signature: sig },
+        }),
+      );
       setNotice("Транзакция подтверждена");
       setModal(false);
       setDetail(null);
@@ -192,6 +201,12 @@ export default function App() {
         >
           <ArrowUpRight size={19} /> DeFi · Raydium <span>↗</span>
         </button>
+        <button
+          className={view === "dashboard" ? "nav active" : "nav"}
+          onClick={() => setView("dashboard")}
+        >
+          <LayoutDashboard size={19} /> RPC Dashboard <span>↗</span>
+        </button>
         <div className="sidebar-bottom">
           <div className="security">
             <LockKeyhole size={21} />
@@ -210,7 +225,11 @@ export default function App() {
         <header>
           <div className="breadcrumb">
             Workspace <span>/</span>{" "}
-            {view === "defi" ? "DeFi · Raydium" : "Обзор проектов"}
+            {view === "dashboard"
+              ? "RPC Dashboard"
+              : view === "defi"
+                ? "DeFi · Raydium"
+                : "Обзор проектов"}
           </div>
           <div className="header-actions">
             <button
@@ -227,11 +246,24 @@ export default function App() {
           <div className="mobile-sections">
             <button onClick={() => setView("projects")}>Проекты</button>
             <button onClick={() => setView("defi")}>DeFi · Raydium</button>
+            <button onClick={() => setView("dashboard")}>RPC Dashboard</button>
           </div>
-          {view === "defi" ? (
-            <Suspense fallback={<p>Загрузка DeFi…</p>}>
-              <DeFiPanel key={wallet?.publicKey.toBase58() || "disconnected"} />
-            </Suspense>
+          {view === "dashboard" ? (
+            <RpcSectionBoundary key="dashboard">
+              <Suspense fallback={<p>Загрузка RPC Dashboard…</p>}>
+                <RpcDashboard
+                  key={wallet?.publicKey.toBase58() || "disconnected"}
+                />
+              </Suspense>
+            </RpcSectionBoundary>
+          ) : view === "defi" ? (
+            <RpcSectionBoundary key="defi">
+              <Suspense fallback={<p>Загрузка DeFi…</p>}>
+                <DeFiPanel
+                  key={wallet?.publicKey.toBase58() || "disconnected"}
+                />
+              </Suspense>
+            </RpcSectionBoundary>
           ) : (
             <>
               <div className="intro">

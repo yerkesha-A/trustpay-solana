@@ -158,6 +158,272 @@
       ]
     },
     {
+      "name": "deposit_liquidity",
+      "discriminator": [
+        245,
+        99,
+        59,
+        25,
+        151,
+        71,
+        233,
+        249
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true
+        },
+        {
+          "name": "liquidity_vault",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  113,
+                  117,
+                  105,
+                  100,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "relations": [
+            "liquidity_vault"
+          ]
+        },
+        {
+          "name": "shares_mint",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  113,
+                  117,
+                  105,
+                  100,
+                  105,
+                  116,
+                  121,
+                  95,
+                  115,
+                  104,
+                  97,
+                  114,
+                  101,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "liquidity_vault"
+              }
+            ]
+          },
+          "relations": [
+            "liquidity_vault"
+          ]
+        },
+        {
+          "name": "reserve",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  113,
+                  117,
+                  105,
+                  100,
+                  105,
+                  116,
+                  121,
+                  95,
+                  114,
+                  101,
+                  115,
+                  101,
+                  114,
+                  118,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "liquidity_vault"
+              }
+            ]
+          },
+          "relations": [
+            "liquidity_vault"
+          ]
+        },
+        {
+          "name": "user_tokens",
+          "writable": true
+        },
+        {
+          "name": "user_shares",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "initialize_liquidity_vault",
+      "discriminator": [
+        100,
+        241,
+        242,
+        43,
+        252,
+        228,
+        234,
+        8
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "liquidity_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  113,
+                  117,
+                  105,
+                  100,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "shares_mint",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  113,
+                  117,
+                  105,
+                  100,
+                  105,
+                  116,
+                  121,
+                  95,
+                  115,
+                  104,
+                  97,
+                  114,
+                  101,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "liquidity_vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "reserve",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  113,
+                  117,
+                  105,
+                  100,
+                  105,
+                  116,
+                  121,
+                  95,
+                  114,
+                  101,
+                  115,
+                  101,
+                  114,
+                  118,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "liquidity_vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "refund",
       "discriminator": [
         2,
@@ -381,9 +647,163 @@
         }
       ],
       "args": []
+    },
+    {
+      "name": "withdraw_liquidity",
+      "discriminator": [
+        149,
+        158,
+        33,
+        185,
+        47,
+        243,
+        253,
+        31
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true
+        },
+        {
+          "name": "liquidity_vault",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  113,
+                  117,
+                  105,
+                  100,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "relations": [
+            "liquidity_vault"
+          ]
+        },
+        {
+          "name": "shares_mint",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  113,
+                  117,
+                  105,
+                  100,
+                  105,
+                  116,
+                  121,
+                  95,
+                  115,
+                  104,
+                  97,
+                  114,
+                  101,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "liquidity_vault"
+              }
+            ]
+          },
+          "relations": [
+            "liquidity_vault"
+          ]
+        },
+        {
+          "name": "reserve",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  113,
+                  117,
+                  105,
+                  100,
+                  105,
+                  116,
+                  121,
+                  95,
+                  114,
+                  101,
+                  115,
+                  101,
+                  114,
+                  118,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "liquidity_vault"
+              }
+            ]
+          },
+          "relations": [
+            "liquidity_vault"
+          ]
+        },
+        {
+          "name": "user_tokens",
+          "writable": true
+        },
+        {
+          "name": "user_shares",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     }
   ],
   "accounts": [
+    {
+      "name": "LiquidityVault",
+      "discriminator": [
+        221,
+        166,
+        52,
+        46,
+        13,
+        174,
+        181,
+        99
+      ]
+    },
     {
       "name": "Order",
       "discriminator": [
@@ -395,6 +815,47 @@
         86,
         28,
         51
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "LiquidityDeposited",
+      "discriminator": [
+        218,
+        155,
+        74,
+        193,
+        59,
+        66,
+        94,
+        122
+      ]
+    },
+    {
+      "name": "LiquidityInitialized",
+      "discriminator": [
+        216,
+        41,
+        64,
+        161,
+        233,
+        30,
+        6,
+        4
+      ]
+    },
+    {
+      "name": "LiquidityWithdrawn",
+      "discriminator": [
+        240,
+        120,
+        73,
+        139,
+        154,
+        31,
+        218,
+        68
       ]
     }
   ],
@@ -423,9 +884,139 @@
       "code": 6004,
       "name": "InvalidRecipient",
       "msg": "Incorrect token recipient"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidVaultAmount",
+      "msg": "Сумма депозита/вывода должна быть больше нуля"
+    },
+    {
+      "code": 6006,
+      "name": "InsufficientDepositTokens",
+      "msg": "Недостаточно свободных токенов для депозита"
+    },
+    {
+      "code": 6007,
+      "name": "InsufficientShares",
+      "msg": "Недостаточно собственных share-токенов для вывода"
+    },
+    {
+      "code": 6008,
+      "name": "InsufficientReserve",
+      "msg": "В Liquidity Vault недостаточно токенов"
+    },
+    {
+      "code": 6009,
+      "name": "MathOverflow",
+      "msg": "Переполнение или некорректная арифметика Vault"
+    },
+    {
+      "code": 6010,
+      "name": "InvalidVaultBacking",
+      "msg": "Резерв Vault не покрывает выпущенные shares"
     }
   ],
   "types": [
+    {
+      "name": "LiquidityDeposited",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "shares",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LiquidityInitialized",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "shares_mint",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LiquidityVault",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "shares_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "reserve",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LiquidityWithdrawn",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "shares",
+            "type": "u64"
+          }
+        ]
+      }
+    },
     {
       "name": "Order",
       "type": {

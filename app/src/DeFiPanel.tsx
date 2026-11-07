@@ -133,6 +133,11 @@ export default function DeFiPanel() {
       setNotice("Отправлено в Devnet. Ожидаем подтверждения…");
       setQuote(null);
       await waitForConfirmation(sig);
+      window.dispatchEvent(
+        new CustomEvent("trustpay:transaction-confirmed", {
+          detail: { network: "devnet", signature: sig },
+        }),
+      );
       setNotice("Транзакция подтверждена в Devnet.");
       setConsent(false);
       try {

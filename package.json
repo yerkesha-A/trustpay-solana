@@ -15,7 +15,13 @@
     "test:defi:devnet": "TRUSTPAY_DEFI_DEVNET=1 ts-mocha -p tsconfig.json -t 240000 tests/defi-devnet.ts",
     "test:defi:local": "TRUSTPAY_DEFI_LOCAL=1 ts-mocha -p tsconfig.json -t 180000 tests/defi-local.ts",
     "test:defi:browser": "node tests/browser-defi.mjs",
-    "test:defi:browser:transactions": "TRUSTPAY_DEFI_BROWSER=1 node tests/browser-defi-transactions.mjs"
+    "test:defi:browser:transactions": "TRUSTPAY_DEFI_BROWSER=1 node tests/browser-defi-transactions.mjs",
+    "test:rpc": "ts-mocha -p tsconfig.json tests/rpc.ts",
+    "test:dashboard:local": "TRUSTPAY_DASHBOARD_NETWORK=localnet node tests/browser-dashboard.mjs",
+    "test:dashboard:devnet": "TRUSTPAY_DASHBOARD_NETWORK=devnet node tests/browser-dashboard.mjs",
+    "deploy:week10:devnet": "node scripts/week10-deploy.mjs",
+    "test:vault:devnet": "TRUSTPAY_WEEK10_DEVNET=1 ts-mocha -p tsconfig.json -t 240000 tests/liquidity-devnet.ts",
+    "deploy:week10:resume": "node scripts/week10-resume.mjs"
   },
   "dependencies": {
     "@coral-xyz/anchor": "0.31.1",
