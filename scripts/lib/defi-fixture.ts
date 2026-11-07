@@ -29,7 +29,7 @@ export async function createTestPool(
     throw Error("Official Raydium deployment not found");
   const configId = getCpmmPdaAmmConfigId(RAYDIUM_DEVNET, 0).publicKey;
   const signatures: string[] = [];
-  // Two newly minted classic SPL assets; they cannot be real Mainnet funds.
+  // Create two SPL mints for the test pool.
   const mints = [
     await createMint(c, payer, payer.publicKey, null, 6),
     await createMint(c, payer, payer.publicKey, null, 6),

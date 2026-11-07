@@ -1,4 +1,4 @@
-// Test transport: serialize real public RPC requests; never substitute RPC data.
+// Serialize RPC requests and retry rate limits.
 let queue = Promise.resolve();
 module.exports = function pacedFetch(input, init) {
     const result = queue.then(async () => {

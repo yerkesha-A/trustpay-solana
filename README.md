@@ -42,5 +42,3 @@ npm run test:security
 - [Vault и RPC Dashboard](docs/week10.md)
 - [AMM / CLMM](docs/week11.md)
 - [Swap и Security Lab](docs/week12.md)
-
-Escrow не поддерживает арбитраж и автоматический возврат. Отмена требует согласия исполнителя.

@@ -162,10 +162,10 @@ export default function DeFiPanel() {
         <div>
           <div className="eyebrow">НЕДЕЛЯ 9 · RAYDIUM CPMM</div>
           <h1>
-            Свободные средства. Новые возможности<span>.</span>
+            Ликвидность Raydium<span>.</span>
           </h1>
           <p>
-            Предоставляйте ликвидность в реальный DeFi-протокол на Solana
+            Депозит и вывод ликвидности на Solana
             Devnet.
           </p>
         </div>
@@ -188,7 +188,7 @@ export default function DeFiPanel() {
               Ликвидность Raydium <ArrowDownUp size={17} />
             </h2>
             <p>
-              Без обещаний доходности. LP может потерять стоимость относительно
+              LP может потерять стоимость относительно
               хранения токенов.
             </p>
           </div>
@@ -252,11 +252,11 @@ export default function DeFiPanel() {
           <div className="empty">
             <ArrowDownUp size={30} />
             <h3>
-              {busy ? "Проверяем пул в Devnet…" : "Выберите настоящий пул"}
+              {busy ? "Проверяем пул в Devnet…" : "Выберите пул"}
             </h3>
             <p>
-              Данные и резервы поступают из RPC. Для учебной пары используйте
-              скрипт подготовки из отчёта недели 9.
+              Введите адрес CPMM-пула Devnet. Настройка пула описана в
+              docs/week09.md.
             </p>
           </div>
         ) : (

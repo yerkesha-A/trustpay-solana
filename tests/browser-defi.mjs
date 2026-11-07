@@ -14,7 +14,7 @@ try {
     .getByRole("button", { name: "DeFi · Raydium ↗", exact: true })
     .click();
   await page
-    .getByRole("heading", { name: "Свободные средства. Новые возможности." })
+    .getByRole("heading", { name: "Ликвидность Raydium." })
     .waitFor();
   assert(
     await page

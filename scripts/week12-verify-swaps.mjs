@@ -1,4 +1,4 @@
-// Read-only: recheck already published signatures; never resend swaps.
+// Read-only verification of existing swap signatures.
 import { createRequire } from 'node:module';
 import { readFileSync, writeFileSync } from 'node:fs';
 import assert from 'node:assert/strict';

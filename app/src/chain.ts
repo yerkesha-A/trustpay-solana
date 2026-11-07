@@ -136,7 +136,7 @@ export async function act(wallet: AnchorWallet, order: Order, action: string) {
     .rpc();
 }
 export async function confirm(signature: string) {
-  // Poll the exact submitted signature; never use a new blockhash to confirm an old transaction.
+  // Confirm the submitted signature without replacing its blockhash.
   for (let i = 0; i < 60; i++) {
     const result = (
       await connection.getSignatureStatuses([signature], {

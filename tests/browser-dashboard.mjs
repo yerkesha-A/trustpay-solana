@@ -198,7 +198,7 @@ try {
     fullPage: true,
   });
   await page
-    .getByRole("button", { name: "Безопасный вывод", exact: true })
+    .getByRole("button", { name: "Вывод", exact: true })
     .click();
   await page.getByLabel("Сумма вывода shares 1:1", { exact: true }).fill("1");
   await page.getByRole("checkbox").check();

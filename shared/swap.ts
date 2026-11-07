@@ -43,6 +43,6 @@ export async function buildSwapTransaction(c:Connection,owner:PublicKey,q:SwapQu
   if(balances[q.aToB?0:1]<q.input)throw Error("Недостаточно свободных токенов в ATA кошелька.");
   validateSwapApproval(q,owner);
   const input=getAssociatedTokenAddressSync(q.inputMint,owner),output=getAssociatedTokenAddressSync(q.outputMint,owner);
-  // Only the signing wallet's ATAs are accepted; no escrow/Vault source parameter exists.
+  // Use the signer's ATAs; escrow accounts are not accepted.
   return new Transaction().add(...swapComputeBudgetInstructions(),createAssociatedTokenAccountIdempotentInstruction(owner,output,owner,q.outputMint),makeSwapCpmmBaseInInstruction(RAYDIUM_DEVNET,owner,getPdaPoolAuthority(RAYDIUM_DEVNET).publicKey,s.configId,canonical,input,output,q.aToB?s.vaultA:s.vaultB,q.aToB?s.vaultB:s.vaultA,TOKEN_PROGRAM_ID,TOKEN_PROGRAM_ID,q.inputMint,q.outputMint,s.observationId,new BN(q.input.toString()),new BN(q.minimum.toString())));
 }

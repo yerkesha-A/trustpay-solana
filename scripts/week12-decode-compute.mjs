@@ -1,4 +1,4 @@
-// Offline decoder for the PUBLIC signing diagnostic; no RPC or signing.
+// Decode a saved signing diagnostic offline.
 import { createRequire } from 'node:module';
 import { readFileSync } from 'node:fs';
 const require=createRequire(import.meta.url);

@@ -1,4 +1,4 @@
-// Resume an existing owned upgradeable-loader buffer. No key generation.
+// Resume deployment from the existing owned buffer.
 import { createRequire } from 'node:module';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';

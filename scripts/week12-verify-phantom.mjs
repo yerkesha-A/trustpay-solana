@@ -1,4 +1,4 @@
-// Read-only on-chain acceptance check for the owner's manual Phantom swap.
+// Verify the manual Phantom swap through read-only RPC calls.
 import { createRequire } from 'node:module';
 import { writeFileSync } from 'node:fs';
 import assert from 'node:assert/strict';

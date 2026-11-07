@@ -1,4 +1,4 @@
-// Explicit opt-in: existing project Devnet wallet, free ATAs, test pair only.
+// Opt-in Devnet test using the project wallet's free tokens.
 import { createRequire } from 'node:module';
 import { readFileSync, writeFileSync } from 'node:fs';
 import assert from 'node:assert/strict';

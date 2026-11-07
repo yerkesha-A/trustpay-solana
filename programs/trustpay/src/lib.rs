@@ -71,7 +71,6 @@ pub mod trustpay {
         ctx.accounts.order.status = Status::Submitted;
         Ok(())
     }
-    // Freelancer explicitly releases their claim before the client can reclaim tokens.
     pub fn allow_cancel(ctx: Context<FreelancerAction>) -> Result<()> {
         require!(
             ctx.accounts.order.status == Status::Funded,

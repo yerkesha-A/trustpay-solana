@@ -1,4 +1,4 @@
-// Corrected artifact only. Ephemeral project-owned fixtures and loopback RPC.
+// Test the corrected lab with local accounts and loopback RPC.
 import { spawn } from 'node:child_process';
 import { mkdirSync, mkdtempSync, openSync, closeSync, writeFileSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -23,13 +23,13 @@ try {
   let ready=false;
   for (let i=0;i<120;i++) {
     if (spawnError || child.exitCode !== null) throw Error(spawnError?.message || 'Local validator stopped; inspect '+ledger+'/validator.log');
-    // Do not use another process already listening on this port.
+    // Reject port collisions.
     if (readFileSync(`${ledger}/validator.log`, 'utf8').includes('Address already in use')) throw Error('Validator port collision');
     try { await c.getSlot(); ready=true; break; } catch {}
     await pause(250);
   }
   assert(ready, 'Local validator readiness timeout');
-  // Prove that the RPC belongs to our child, not an existing public/proxy service.
+  // Verify that RPC belongs to this validator.
   const identity = await c._rpcRequest("getIdentity", []);
   assert(!identity.error);
   const localIdentity = Keypair.fromSecretKey(Uint8Array.from(JSON.parse(readFileSync(`${ledger}/validator-keypair.json`, 'utf8')))).publicKey.toBase58();

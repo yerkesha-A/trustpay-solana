@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { Keypair, Transaction, SystemProgram } from "@solana/web3.js";
 import { requestWalletSignature } from "../shared/wallet-signing";
-// Generated memory-only test signers; no Phantom extension, network or user keys.
+// In-memory test signers; no extension or RPC.
 describe("Wallet signature request contract (not manual Phantom approval)", () => {
   const owner = Keypair.generate(), recipient = Keypair.generate().publicKey;
   const blockhash = Keypair.generate().publicKey.toBase58();
@@ -87,7 +87,7 @@ describe("Phantom automatic Compute Budget regression", () => {
   const blockhash=Keypair.generate().publicKey.toBase58();
   const base=()=>new Transaction().add(SystemProgram.transfer({fromPubkey:owner.publicKey,toPubkey:recipient,lamports:1}));
   const provider=async (tx:Transaction)=>{
-    // Exact public instruction bytes supplied from the user's Chrome diagnostic.
+    // Instruction bytes captured from Phantom.
     if(!tx.instructions.some(ix=>ix.programId.equals(ComputeBudgetProgram.programId))) {
       const {TransactionInstruction,PublicKey}=require('@solana/web3.js');
       const {utils}=require('@coral-xyz/anchor');

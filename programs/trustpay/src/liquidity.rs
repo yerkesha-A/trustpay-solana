@@ -98,8 +98,7 @@ pub fn withdraw(ctx: Context<LiquidityTransfer>, amount: u64) -> Result<()> {
         .amount
         .checked_sub(amount)
         .ok_or(EscrowError::MathOverflow)?;
-    // Burn is authorized by the holder, transfer only by the isolated Liquidity PDA.
-    // Both CPIs are atomic: a failed transfer rolls the burn back.
+    // A failed transfer rolls back the share burn.
     token::burn(
         CpiContext::new(
             ctx.accounts.token_program.to_account_info(),

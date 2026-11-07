@@ -217,9 +217,9 @@ export default function App() {
         <div className="sidebar-bottom">
           <div className="security">
             <LockKeyhole size={21} />
-            <strong>Защищено кодом</strong>
+            <strong>Escrow</strong>
             <p>Тестовые токены хранятся в escrow до подтверждения работы.</p>
-            <small>Учебный MVP · без аудита</small>
+            <small>Независимый аудит не проводился</small>
           </div>
           <div className="network">
             <i />
@@ -293,7 +293,7 @@ export default function App() {
                   <h1>
                     Ваша работа. Под защитой<span>.</span>
                   </h1>
-                  <p>Управляйте проектами и безопасно оплачивайте результат.</p>
+                  <p>Заказы, статусы и выплаты.</p>
                 </div>
                 <button
                   className="primary"
@@ -419,13 +419,13 @@ export default function App() {
                     </div>
                     <h3>
                       {wallet
-                        ? "Здесь начнётся ваш следующий проект"
-                        : "Хорошие проекты начинаются с доверия"}
+                        ? "Нет заказов"
+                        : "Кошелёк не подключён"}
                     </h3>
                     <p>
                       {wallet
-                        ? "В выбранной категории пока нет заказов. Создайте первый escrow-заказ."
-                        : "Подключите Phantom, чтобы увидеть свои заказы и начать безопасную работу."}
+                        ? "В выбранной категории нет заказов."
+                        : "Подключите Phantom, чтобы увидеть заказы."}
                     </p>
                     {!wallet ? (
                       <WalletMultiButton />
@@ -516,7 +516,7 @@ export default function App() {
             </>
           )}
           <footer>
-            <span>© TrustPay · University Blockchain Project</span>
+            <span>© TrustPay</span>
             <span>
               Solana <i /> Только Localnet / Devnet
             </span>
@@ -709,8 +709,8 @@ export default function App() {
                       )}
                   </div>
                   <p className="warning">
-                    Арбитраж не входит в MVP. Согласованная отмена доступна
-                    только до сдачи работы.
+                    Арбитража нет. Отмена возможна с согласия исполнителя
+                    до сдачи работы.
                   </p>
                 </>
               )

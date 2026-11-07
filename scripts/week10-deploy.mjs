@@ -1,4 +1,4 @@
-// Existing project signer + program keypair only. Never print CLI recovery phrases.
+// Reuse project keys; do not print private CLI output.
 import { readFileSync, writeFileSync, statSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
@@ -66,7 +66,7 @@ try {
       `Deployment failed (exit ${e.status ?? "timeout"}). ${line || "Diagnostic log retained only in ignored .anchor/week10-deploy.log."}`,
     );
   }
-  // Whitelist public fields only; private CLI recovery output is never forwarded.
+  // Forward public deployment fields only.
   for (const line of log.split("\n"))
     if (/^(Program Id:|Signature:)/.test(line)) console.log(line);
   const loader = new PublicKey("BPFLoaderUpgradeab1e11111111111111111111111");

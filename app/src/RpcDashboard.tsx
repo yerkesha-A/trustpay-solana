@@ -243,7 +243,7 @@ export default function RpcDashboard() {
           );
         if (orders)
           addresses.push(...orders.slice(0, 4).map((o) => o.publicKey));
-        // Incoming SPL transfers may reference only the recipient token account, not its wallet.
+        // Incoming SPL transfers may reference a token account instead of its wallet.
         addresses.push(
           ...(walletData.tokens || [])
             .flatMap((t) => t.accounts)
@@ -621,7 +621,7 @@ export default function RpcDashboard() {
                         >
                           {type === "deposit"
                             ? "Добровольный депозит"
-                            : "Безопасный вывод"}
+                            : "Вывод"}
                         </button>
                       ))}
                     </div>
@@ -830,7 +830,7 @@ export default function RpcDashboard() {
                 </div>
                 {historyLoading ? (
                   <p className="rpc-padding" role="status">
-                    Загрузка реальных транзакций…
+                    Загрузка транзакций…
                   </p>
                 ) : (
                   historyError && (

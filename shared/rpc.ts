@@ -248,7 +248,7 @@ export function transactionActions(
           ]?.toBase58(),
       });
     } catch {
-      /* Unknown/new instructions remain unclassified, never fabricated. */
+      /* Leave unknown instructions unclassified. */
     }
   }
   return result;
@@ -265,7 +265,7 @@ export async function fetchRecentHistory(
   ).slice(0, 8);
   const signatures = new Map<string, ConfirmedSignatureInfo>(),
     warnings: string[] = [];
-  // Bounded sequential address reads avoid flooding shared Devnet RPC.
+  // Read addresses sequentially to limit RPC requests.
   for (const address of unique) {
     if (signal?.aborted) throw Error("Запрос отменён.");
     try {

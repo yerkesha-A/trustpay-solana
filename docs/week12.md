@@ -54,4 +54,6 @@ VITE_PROGRAM_ID=ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A
 ![Desktop](screenshots/week12-desktop.png)
 ![Mobile](screenshots/week12-mobile.png)
 
+## Ограничения
+
 Поддерживаются CPMM и classic SPL. Нет Token-2022, SOL wrapping и CLMM swap. Лаборатория не развёртывалась в публичной сети. Независимый аудит не проводился.

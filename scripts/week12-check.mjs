@@ -1,4 +1,4 @@
-// Read-only verification: no keypairs, signatures, transfers or lab execution.
+// Read the Devnet pool and calculate quotes.
 import { createRequire } from 'node:module';
 import { writeFileSync } from 'node:fs';
 const require = createRequire(import.meta.url);

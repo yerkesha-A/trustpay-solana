@@ -18,12 +18,12 @@ const dec = (n: string | number | bigint) => new D(n.toString());
 export const CLMM_DEVNET = new PublicKey(
   "DRayAUgENGQBKVaX8owNhgzkEDyoHTGVEGHVJT1E9pfH",
 );
-// Public addresses only; every selection is revalidated against live Devnet RPC.
+// Pool accounts are validated through Devnet RPC.
 export const MARKET_POOLS = [
   {
     kind: "cpmm",
     address: "8biZWzVLXx9AC5N2c3mJjbeGLGMRJzuDksCSibnvHsB3",
-    label: "CPMM · учебный пул TrustPay",
+    label: "CPMM · TrustPay",
   },
   {
     kind: "clmm",

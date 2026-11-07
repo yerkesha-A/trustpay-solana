@@ -169,8 +169,7 @@ export default function LiquidityPanel({ onLp }: { onLp: () => void }) {
             Ликвидность в вашем диапазоне<span>.</span>
           </h1>
           <p>
-            Настоящие Devnet-пулы, прозрачные резервы и расчёт позиции до
-            решения.
+            Резервы Devnet-пулов и расчёт диапазона позиции.
           </p>
         </div>
         <span className="defi-network">● Solana Devnet</span>

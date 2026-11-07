@@ -1,4 +1,4 @@
-// Real installed Phantom adapter + synthetic provider. No extension approval/signature.
+// Installed Phantom adapter with a test provider, not the extension.
 import { createRequire } from 'node:module';
 import { writeFileSync } from 'node:fs';
 import assert from 'node:assert/strict';

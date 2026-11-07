@@ -15,7 +15,7 @@ import {
   getPdaPoolAuthority,
 } from "@raydium-io/raydium-sdk-v2";
 
-// Official Raydium Devnet deployment; no user-supplied program ID.
+// Raydium CPMM Devnet program.
 export const RAYDIUM_DEVNET = new PublicKey(
   "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
 );
@@ -244,7 +244,7 @@ export async function buildLiquidityTransaction(
     getAssociatedTokenAddressSync(m, owner),
   );
   const tx = new Transaction();
-  // Sources and destinations are ONLY this wallet's ATAs. No escrow account is accepted.
+  // Use wallet ATAs, not escrow accounts.
   for (const [ata, mint] of [
     [userA, s.mintA],
     [userB, s.mintB],

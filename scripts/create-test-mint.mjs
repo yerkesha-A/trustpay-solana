@@ -1,4 +1,4 @@
-// Run only against a local validator. Private key stays outside the repository.
+// Localnet only; keys stay outside Git.
 import { readFileSync } from "node:fs";
 import { Connection, Keypair, PublicKey } from "@solana/web3.js";
 import {

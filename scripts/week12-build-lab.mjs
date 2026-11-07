@@ -1,4 +1,4 @@
-// Builds only the corrected artifact. No deployment or insecure feature flag.
+// Build the localnet lab without deploying.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 mkdirSync('.anchor/week12-lab/fixed', { recursive:true });

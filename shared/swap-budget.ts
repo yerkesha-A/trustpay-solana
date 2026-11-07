@@ -1,7 +1,6 @@
 import { ComputeBudgetProgram } from "@solana/web3.js";
 
-// Explicit Devnet swap policy, set before approval. No wallet-selected extra fee.
-// The live ATA + CPMM simulation consumed ~38k CU; this leaves ample headroom.
+// Set fees before signing. The ATA + swap simulation used about 38k CU.
 export const SWAP_COMPUTE_UNIT_LIMIT = 200_000;
 export const SWAP_COMPUTE_UNIT_PRICE = 0n; // micro-lamports per CU
 export function swapComputeBudgetInstructions() {
@@ -11,7 +10,7 @@ export function swapComputeBudgetInstructions() {
   ];
 }
 
-// Diagnostics only: decoding never grants permission for added instructions.
+// Decode for diagnostics; signing validation remains separate.
 export function decodeComputeBudget(message: import("@solana/web3.js").Message) {
   const entries = message.compiledInstructions.flatMap((ix, index) => {
     if (!message.accountKeys[ix.programIdIndex].equals(ComputeBudgetProgram.programId)) return [];

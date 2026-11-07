@@ -1,5 +1,4 @@
-//! LOCAL VALIDATOR ONLY. NEVER DEPLOY THIS EDUCATIONAL PROGRAM TO A PUBLIC NETWORK.
-//! Authorization is mandatory in every build. No insecure build mode is provided.
+//! Localnet only. Do not deploy to public networks.
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Mint, Token, TokenAccount, TransferChecked};
 declare_id!("BJgBQA7UGzQQuPWVn16Qw931M5LfLaBh3Taid77BLpTw");
@@ -33,7 +32,7 @@ pub mod security_vault_lab {
         let owner = ctx.accounts.vault.owner;
         let bump = [ctx.accounts.vault.bump];
         let seeds: &[&[u8]] = &[b"lab", owner.as_ref(), &bump];
-        // PDA signing authorizes the CPI; has_one=owner separately authorizes the caller.
+        // has_one authorizes the caller; PDA seeds authorize the CPI.
         token::transfer_checked(
             CpiContext::new_with_signer(
                 ctx.accounts.token_program.to_account_info(),
@@ -67,7 +66,6 @@ pub struct Deposit<'info> {
 #[derive(Accounts)]
 pub struct Withdraw<'info> {
     pub owner: Signer<'info>,
-    // FIX: canonical PDA + typed owner + signer must match the stored depositor.
     #[account(seeds=[b"lab", vault.owner.as_ref()], bump=vault.bump, has_one=mint, has_one=owner)]
     pub vault: Account<'info, LabVault>,
     pub mint: Account<'info, Mint>,

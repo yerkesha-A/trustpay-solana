@@ -5,8 +5,7 @@ export type TransactionSigner = {
   publicKey: PublicKey;
   signTransaction: (transaction: Transaction) => Promise<Transaction>;
 };
-// Compare executable meaning, independently of account-table ordering. All account
-// privileges and every ordered instruction account/data byte remain protected.
+// Compare resolved instructions and permissions, not account-table order.
 export function signingMessageSnapshot(message: Message) {
   return {
     payer: message.accountKeys[0].toBase58(),
@@ -22,7 +21,6 @@ export function signingMessageSnapshot(message: Message) {
     })),
   };
 }
-// No user keys or signatures are manufactured here. Phantom approval is required.
 export async function requestWalletSignature(
   wallet: TransactionSigner,
   transaction: Transaction,
@@ -31,14 +29,13 @@ export async function requestWalletSignature(
   transaction.feePayer = wallet.publicKey;
   transaction.recentBlockhash = blockhash;
   const before = transaction.serializeMessage();
-  // Parse a copy before awaiting: wallet implementations may mutate the input.
+  // Snapshot before awaiting: the wallet may mutate the input.
   const expected = signingMessageSnapshot(Message.from(before));
   const signed = await wallet.signTransaction(transaction);
   const after = signed.serializeMessage();
   const actual = signingMessageSnapshot(Message.from(after));
   const sameMeaning = JSON.stringify(expected) === JSON.stringify(actual);
-  // Public transaction bytes only. Keep diagnostic information locally so a real
-  // extension mismatch can be inspected, instead of guessing what it changed.
+  // Store public message bytes locally for diagnosing wallet changes.
   const diagnostic = {
     checkedAt: new Date().toISOString(),
     sameBytes: before.equals(after), sameMeaning,
