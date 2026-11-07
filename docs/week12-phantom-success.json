@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-11-07T17:33:57.043Z",
+  "network": "devnet",
+  "signature": "5VuPDpWkRiYfLcq5A22WfrAvFBLD2xjH5Yjjrb35KQZRmTzjpymNE8akhnAwCdDBT5b231otvq5rBvsdfA8Gb4Cw",
+  "explorer": "https://explorer.solana.com/tx/5VuPDpWkRiYfLcq5A22WfrAvFBLD2xjH5Yjjrb35KQZRmTzjpymNE8akhnAwCdDBT5b231otvq5rBvsdfA8Gb4Cw?cluster=devnet",
+  "status": "finalized",
+  "slot": 519736304,
+  "owner": "2mxYEEpyuuo1msxRXGB4wWNqeCeaPSrcywcw2Qq7tEab",
+  "ownerSignatureVerified": true,
+  "inputMint": "2CLKeMqA9MJxitEwYZi1bXmQx14QXS3gCm5xSHSs5SDf",
+  "outputMint": "2pybmyQorJG1CvyZ8eZMKgUca9BGAkze1MzQx6fR81wW",
+  "inputRaw": "1000000",
+  "outputRaw": "996513",
+  "minimumRaw": "991530",
+  "computeBudget": {
+    "entries": [
+      {
+        "index": 0,
+        "kind": "SetComputeUnitLimit",
+        "value": "200000"
+      },
+      {
+        "index": 1,
+        "kind": "SetComputeUnitPrice",
+        "value": "0"
+      }
+    ],
+    "priorityFeeLamports": "0"
+  },
+  "feeLamports": 5000,
+  "ownerSolSpentLamports": 1493440,
+  "destinationAccountLamports": 1488440,
+  "trustpayProgramAbsent": true,
+  "transactionsSentByVerifier": 0
+}

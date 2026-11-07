@@ -1,0 +1,50 @@
+// Read-only on-chain acceptance check for the owner's manual Phantom swap.
+import { createRequire } from 'node:module';
+import { writeFileSync } from 'node:fs';
+import assert from 'node:assert/strict';
+const require=createRequire(import.meta.url);
+require('ts-node').register({project:'tsconfig.json'});
+const {Connection,PublicKey,Transaction}=require('@solana/web3.js');
+const {getAssociatedTokenAddressSync,ASSOCIATED_TOKEN_PROGRAM_ID}=require('@solana/spl-token');
+const {decodeComputeBudget}=require('../shared/swap-budget.ts');
+const {RAYDIUM_DEVNET}=require('../shared/defi.ts');
+const c=new Connection('https://api.devnet.solana.com',{commitment:'finalized',fetch:require('./devnet-fetch.cjs'),disableRetryOnRateLimit:true});
+assert.equal(await c.getGenesisHash(),'EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG');
+const owner=new PublicKey('2mxYEEpyuuo1msxRXGB4wWNqeCeaPSrcywcw2Qq7tEab');
+const a=new PublicKey('2CLKeMqA9MJxitEwYZi1bXmQx14QXS3gCm5xSHSs5SDf'),b=new PublicKey('2pybmyQorJG1CvyZ8eZMKgUca9BGAkze1MzQx6fR81wW');
+const rows=process.argv[2]?[{signature:process.argv[2],err:null}]:await c.getSignaturesForAddress(owner,{limit:20});
+let evidence;
+for(const row of rows){
+ if(row.err)continue;
+ const tx=await c.getTransaction(row.signature,{commitment:'finalized',maxSupportedTransactionVersion:0});
+ if(!tx?.meta || tx.meta.err || !('accountKeys' in tx.transaction.message))continue;
+ const m=tx.transaction.message;
+ const ix=m.compiledInstructions.find(ix=>m.accountKeys[ix.programIdIndex].equals(RAYDIUM_DEVNET));
+ if(!ix)continue;
+ const signed=Transaction.populate(m,tx.transaction.signatures);
+ assert(signed.verifySignatures());assert(m.accountKeys[0].equals(owner));assert(m.isAccountSigner(0));
+ assert.equal(m.instructions.length,4);
+ assert(m.accountKeys[m.instructions[2].programIdIndex].equals(ASSOCIATED_TOKEN_PROGRAM_ID));
+ assert(m.accountKeys[m.instructions[3].programIdIndex].equals(RAYDIUM_DEVNET));
+ const budget=decodeComputeBudget(m);
+ assert.deepEqual(budget.entries.map(e=>[e.kind,e.value]),[['SetComputeUnitLimit','200000'],['SetComputeUnitPrice','0']]);
+ assert.equal(budget.priorityFeeLamports,'0');
+ assert.equal(Buffer.from(ix.data).subarray(0,8).toString('hex'),'8fbe5adac41e33de');
+ const input=Buffer.from(ix.data).readBigUInt64LE(8),minimum=Buffer.from(ix.data).readBigUInt64LE(16);
+ assert.equal(input,1000000n);assert.equal(minimum,991530n);
+ const source=getAssociatedTokenAddressSync(a,owner),destination=getAssociatedTokenAddressSync(b,owner);
+ assert(m.accountKeys[ix.accountKeyIndexes[4]].equals(source));assert(m.accountKeys[ix.accountKeyIndexes[5]].equals(destination));
+ assert(m.accountKeys[ix.accountKeyIndexes[10]].equals(a));assert(m.accountKeys[ix.accountKeyIndexes[11]].equals(b));
+ const delta=mint=>{
+  const post=tx.meta.postTokenBalances.find(x=>x.owner===owner.toBase58()&&x.mint===mint.toBase58());assert(post);
+  const pre=tx.meta.preTokenBalances.find(x=>x.accountIndex===post.accountIndex&&x.mint===post.mint);
+  return BigInt(post.uiTokenAmount.amount)-BigInt(pre?.uiTokenAmount.amount||'0');
+ };
+ assert.equal(delta(a),-input);assert(delta(b)>=minimum);
+ assert(!m.accountKeys.some(k=>k.toBase58()==='ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A'));
+ const status=(await c.getSignatureStatuses([row.signature],{searchTransactionHistory:true})).value[0];assert.equal(status?.confirmationStatus,'finalized');
+ evidence={checkedAt:new Date().toISOString(),network:'devnet',signature:row.signature,explorer:`https://explorer.solana.com/tx/${row.signature}?cluster=devnet`,status:status.confirmationStatus,slot:tx.slot,owner:owner.toBase58(),ownerSignatureVerified:true,inputMint:a.toBase58(),outputMint:b.toBase58(),inputRaw:input.toString(),outputRaw:delta(b).toString(),minimumRaw:minimum.toString(),computeBudget:budget,feeLamports:tx.meta.fee,ownerSolSpentLamports:tx.meta.preBalances[0]-tx.meta.postBalances[0],destinationAccountLamports:tx.meta.postBalances[m.accountKeys.findIndex(k=>k.equals(destination))],trustpayProgramAbsent:true,transactionsSentByVerifier:0};
+ break;
+}
+assert(evidence,'No finalized matching manual Phantom swap found');
+writeFileSync('docs/week12-phantom-success.json',JSON.stringify(evidence,null,2)+'\n');console.log(JSON.stringify(evidence,null,2));

@@ -1,6 +1,6 @@
 {
   "network": "isolated localnet only",
-  "verifiedAt": "2026-11-07T16:51:47.386Z",
+  "verifiedAt": "2026-11-07T17:34:18.075Z",
   "program": "BJgBQA7UGzQQuPWVn16Qw931M5LfLaBh3Taid77BLpTw",
   "artifactSha256": "ad118e6758e87136079f667754147550c987a202ea564f699fb6080aadfdb1e7",
   "cases": [
@@ -86,8 +86,8 @@
       "balancesUnchanged": true
     }
   ],
-  "genesis": "2uB8GkVj7qE8EGXNghVzAJgMfDEsiFQXSQE95fovu9Pc",
-  "depositSignature": "3B2gGUmREzUJPri5fsXYFzb4HrpmZwCZZ44ymdMxZVPNDZcv4YeLyQp7mZh2b7D9hsSb2FBPRXDkmyZ37Yk862EN",
-  "withdrawSignature": "2BNZZFEgaN8tsfrtcan1xnHMq97xuDHtvYC32WBcFGKH42U9pyJGZfJtwLUr9UdLj35HdXdNtKutPXsYTf3YNBam",
+  "genesis": "62zapb3STw59SVzoHnqSyFtTm9B39CDe2wabTXkSZJZn",
+  "depositSignature": "2mhNAznsm1gNDxDKKZ3sxp2uQtFr2qgsaxHYiYUVP5HCw2xcrjtxEnXZEUYEswEYQNoU65SXfsHfhWqCCdHpnjWK",
+  "withdrawSignature": "46Vd9PKDtq4uwDaBc6m5nKtBtCKWsTc7sZZBiU4qq8cFm2pdRzMuLnidAMBQec8pKQS1SJCPN2Z63zvNUrEPyot9",
   "status": "passed"
 }

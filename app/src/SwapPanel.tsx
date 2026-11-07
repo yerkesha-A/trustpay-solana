@@ -54,7 +54,7 @@ export default function SwapPanel({ connection }: { connection: Connection }) {
   const outputDecimals = market ? (reverse ? market.pool.decimalsA : market.pool.decimalsB) : 0;
   return <section className="projects defi-card swap-card" aria-label="Raydium Swap">
     <h2>Raydium Swap · Devnet</h2>
-    <p>Только свободные SPL-токены кошелька. Quote действует 30 секунд. Нужны тестовые SOL для комиссии и ATA.</p>
+    <p>Только свободные SPL-токены кошелька. Quote действует 30 секунд. Приоритетная комиссия: 0 SOL; лимит: 200 000 CU. Нужны тестовые SOL для сетевой комиссии и ATA.</p>
     <form className="pool-form" onSubmit={e => { e.preventDefault(); void run(async () => { setQuote(null); setMarket(null); await refresh(); }); }}>
       <label>CPMM-пул для обмена<input value={address} disabled={busy} onChange={e => { setAddress(e.target.value); setMarket(null); setQuote(null); setBalances([]); }} /></label>
       <button className="secondary" disabled={busy}>Загрузить swap-пул</button>

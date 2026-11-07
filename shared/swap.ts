@@ -1,4 +1,5 @@
 import BN from "bn.js";
+import { swapComputeBudgetInstructions } from "./swap-budget";
 import { PublicKey, Connection, Transaction } from "@solana/web3.js";
 import { TOKEN_PROGRAM_ID, getAssociatedTokenAddressSync, unpackAccount, createAssociatedTokenAccountIdempotentInstruction } from "@solana/spl-token";
 import { getPdaPoolAuthority, getCpmmPdaPoolId, getPdaVault, getPdaObservationId, makeSwapCpmmBaseInInstruction } from "@raydium-io/raydium-sdk-v2";
@@ -43,5 +44,5 @@ export async function buildSwapTransaction(c:Connection,owner:PublicKey,q:SwapQu
   validateSwapApproval(q,owner);
   const input=getAssociatedTokenAddressSync(q.inputMint,owner),output=getAssociatedTokenAddressSync(q.outputMint,owner);
   // Only the signing wallet's ATAs are accepted; no escrow/Vault source parameter exists.
-  return new Transaction().add(createAssociatedTokenAccountIdempotentInstruction(owner,output,owner,q.outputMint),makeSwapCpmmBaseInInstruction(RAYDIUM_DEVNET,owner,getPdaPoolAuthority(RAYDIUM_DEVNET).publicKey,s.configId,canonical,input,output,q.aToB?s.vaultA:s.vaultB,q.aToB?s.vaultB:s.vaultA,TOKEN_PROGRAM_ID,TOKEN_PROGRAM_ID,q.inputMint,q.outputMint,s.observationId,new BN(q.input.toString()),new BN(q.minimum.toString())));
+  return new Transaction().add(...swapComputeBudgetInstructions(),createAssociatedTokenAccountIdempotentInstruction(owner,output,owner,q.outputMint),makeSwapCpmmBaseInInstruction(RAYDIUM_DEVNET,owner,getPdaPoolAuthority(RAYDIUM_DEVNET).publicKey,s.configId,canonical,input,output,q.aToB?s.vaultA:s.vaultB,q.aToB?s.vaultB:s.vaultA,TOKEN_PROGRAM_ID,TOKEN_PROGRAM_ID,q.inputMint,q.outputMint,s.observationId,new BN(q.input.toString()),new BN(q.minimum.toString())));
 }

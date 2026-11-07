@@ -1,147 +1,157 @@
 # Неделя 12 — Raydium Swap и Security Lab
 
-Дата проверки: 7 ноября 2026 года (Asia/Almaty).
+Дата итоговой проверки: 7 ноября 2026 года (Asia/Almaty).
 
-**Raydium Swap и безопасная Security Lab реализованы и проверены. Ручное подтверждение в расширении Phantom остаётся непроверенным; полное end-to-end закрытие недели пока не подтверждено. Завершающие изменения находятся в отдельной ветке и требуют одобренного merge в main.**
+**Неделя 12 завершена в согласованном объёме: реальный Raydium Swap, ручная проверка Phantom на Devnet и безопасная Security Lab на изолированном localnet.** Успешный ручной swap независимо проверен по данным сети, а не заменён автоматическим тестом. История main сохраняется; завершающие изменения объединяются обычным merge по разрешению владельца.
 
-## Цель и реализация
+## Цель и реализованные функции
 
-Обмен свободных тестовых SPL-токенов через настоящий Raydium CPMM, без доступа к escrow или Liquidity Vault TrustPay. Разработка продолжает существующий проект; программы TrustPay не изменены.
+Обмен свободных тестовых SPL-токенов через настоящий Raydium CPMM и проверка авторизации учебного vault. Существующий проект продолжен без изменения контрактов TrustPay и бизнес-логики предыдущих недель. Mainnet и escrow для swap не используются.
 
-- Используется установленный `@raydium-io/raydium-sdk-v2@0.2.81-alpha`: CPMM layouts/PDA, `makeSwapCpmmBaseInInstruction`. Это настоящая инструкция Raydium, без собственного имитатора AMM.
-- Данные заданного публичного Devnet-пула читаются из RPC: владельцы, discriminator, SPL mint/vault, резервы, config и торговая комиссия. Есть готовый учебный пул и ввод другого адреса. Каталог всех пулов и mainnet API не используются.
-- Выбор A → B / B → A, точные BigInt-расчёты, комиссия, price impact, slippage 1–500 bps и minimum received. Расчёт проверен относительно закреплённого SDK существующими AMM-тестами.
-- Quote привязан к кошельку и данным пула, действует 30 секунд. Изменение полей формы сбрасывает quote; перед подписью перечитываются пул и балансы, проверяются PDA и доступность обменов. После подписи срок проверяется повторно.
-- Источник и получатель — только ATA подписанта. Создание output ATA идемпотентно. В интерфейсе кошелёк подписывает транзакцию, затем выполняются preflight, отправка и подтверждение. Сообщение об успехе появляется только после подтверждения без ошибки; балансы перечитываются после него.
-- Explorer доступен по подписи, в том числе при неопределённом результате отправки. Ошибки RPC, недостаточный баланс, просроченная котировка и отказ кошелька отображаются пользователю.
-- Адаптивная форма встроена в существующую вкладку DeFi. Проверена ширина 390 px без горизонтального переполнения.
+Во вкладке **DeFi · Raydium → Raydium Swap · Devnet** реализованы:
 
-## Проверки
+- Чтение настоящего CPMM-пула через Devnet RPC: владельцы, discriminator, mint/vault, резервы и on-chain комиссия. Есть готовый учебный пул и ввод другого публичного адреса.
+- Выбор A → B / B → A, точные BigInt-расчёты output, комиссии, price impact и minimum received; slippage 1–500 bps.
+- Quote на 30 секунд, привязанный к кошельку. Изменение полей сбрасывает quote; до подписи перечитываются пул и свободные балансы, проверяются PDA, доступность swap и цена относительно одобренного minimum.
+- Источник и получатель — только ATA подписанта; создание output ATA идемпотентно. Заблокированные средства escrow и Liquidity Vault недоступны через этот путь.
+- Запрос подписи Phantom, проверка возвращённого message и подписи, preflight, отправка, подтверждение без ошибки, обновление балансов и ссылка Explorer.
+- Обработка отказа кошелька, недостаточного баланса, RPC-ошибок, истечения quote и неполученного подтверждения. Отсутствие подтверждения не объявляется успехом.
+- Адаптивная форма, проверенная на desktop и 390 px без горизонтального переполнения.
 
-- `npm run build` — успешно; Vite предупреждает о крупных JS chunks.
-- `npx tsc --noEmit -p tsconfig.json` — успешно.
-- `npm run test:unit` — **29 passing**: прежние 26 unit-тестов и 3 новых теста запроса подписи, отказа и проверки ответа кошелька.
-- `npm run test:swap:rpc` — прочитан настоящий Devnet-пул, получены котировки в обоих направлениях. [Данные RPC](week12-rpc-evidence.json) содержат slot, резервы, mint и комиссию; этот скрипт не отправляет транзакций.
-- Ранее `npm run test:swap:devnet` подтвердил два настоящих swap и проверил input/output ≥ minimum. [Исходные подписи и балансы](week12-swap-evidence.json) сохранены. В завершающем запуске обмены **не повторялись**: `npm run verify:swap` перечитал обе транзакции как **finalized**, заново проверил метаданные token balances. [Повторная проверка](week12-swap-reverification.json).
-- `npm run test:swap:browser` — отображение формы, desktop/mobile, отсутствие runtime page errors. Проверка не подписывает транзакции через Phantom. Дополнительная попытка browser QA загрузить живой пул не завершилась за время проверки RPC и была остановлена; успешное чтение пула и транзакции подтверждены отдельными Node-скриптами. Прямой RPC из браузера отдельно не подтверждён.
-- Обычные `tests/trustpay.ts` и `tests/liquidity.ts` на отдельном localnet validator с существующим `target/deploy/trustpay.so` — **23 passing**. В этом отдельном validator лабораторные программы не загружались. Использован существующий артефакт TrustPay; Rust-код TrustPay не изменён и не пересобирался. Эти 23 теста повторены при завершении Security Lab.
+Используется закреплённый `@raydium-io/raydium-sdk-v2@0.2.81-alpha`: layouts/PDA и `makeSwapCpmmBaseInInstruction`. Расчёты AMM сверены существующими тестами с SDK. Это настоящая инструкция Raydium, а не имитатор обмена.
 
-## Подтверждённые транзакции
+## Подтверждённый ручной Phantom Swap
 
-Сеть — **Devnet**, только существующая учебная пара с 6 decimals, по 1 тестовому токену. Это не mainnet и не средства заказов. CLI-подписант — существующий учебный кошелёк проекта; приватный ключ не публикуется.
+Владелец вручную подключил настоящий Phantom в Chrome, выбрал Solana Devnet и проверил отказ: «Отмена» вызвала `WalletSignTransactionError: User rejected the request`. После исправления подготовки Compute Budget владелец вручную подтвердил новую котировку **A → B, 1 токен, 50 bps**.
 
-| Направление | Input (raw) | Minimum (raw) | Получено (raw) | Explorer |
-| --- | ---: | ---: | ---: | --- |
-| A → B | 1000000 | 991528 | 996511 | [Подтверждённый swap](https://explorer.solana.com/tx/34yYvSnGXxJTUnxVCyuW7bzovDBp14P8wcug9oAAeciGHGTNnDKY8Zx1amYMYkoQGRtjgk8DsWJJSZBNK7tcgN7E?cluster=devnet) |
-| B → A | 1000000 | 993497 | 998490 | [Подтверждённый swap](https://explorer.solana.com/tx/4EBbXzBYYTysG6v26iPRQcvhr5KATgCrCVUS6UvQBAgCK6H7j4ixn5xaEYRn3MDmMaemxedu68YUwgdMrLd5uHP?cluster=devnet) |
+[Ручной swap в Solana Explorer](https://explorer.solana.com/tx/5VuPDpWkRiYfLcq5A22WfrAvFBLD2xjH5Yjjrb35KQZRmTzjpymNE8akhnAwCdDBT5b231otvq5rBvsdfA8Gb4Cw?cluster=devnet).
 
-## Безопасная статическая проверка
+| Проверка по сети | Результат |
+| --- | --- |
+| Статус | **finalized**, без ошибки |
+| Подписант / payer | `2mxYEEpyuuo1msxRXGB4wWNqeCeaPSrcywcw2Qq7tEab` |
+| Криптографическая проверка подписи | Успешна |
+| Input A | **1** (1000000 raw) |
+| Output B | **0,996513** (996513 raw) |
+| Minimum B в инструкции | **0,991530** (991530 raw) |
+| Compute budget | 200000 CU, цена 0 micro-lamports/CU |
+| Priority fee | **0 SOL** |
+| Фактическая сетевая комиссия `meta.fee` | **0,000005 SOL** |
+| Создание output ATA, rent-exempt balance | **0,00148844 SOL** |
+| Общее уменьшение SOL подписанта | **0,00149344 SOL** |
+| Программа TrustPay / escrow в аккаунтах транзакции | Отсутствует |
 
-Проверены `programs/trustpay/src/lib.rs`, `programs/trustpay/src/liquidity.rs` и shared swap/pool loader. Это ограниченная проверка исходников и регрессионные тесты, а не полный аудит.
+[JSON-доказательства](week12-phantom-success.json) содержат подпись, slot, результаты проверки signature, ATA, input/output/minimum и комиссий. `node scripts/week12-verify-phantom.mjs ПОДПИСЬ` воспроизводит проверку **только чтением**, без новых swap.
 
-- Escrow: client/freelancer требуют `Signer`, действия freelancer используют `has_one`, order проверяется по seeds и bump. Источник funding привязан к client/mint. Выплата требует client, правильный mint, vault PDA и получателя по роли. Статусы исключают повторный вывод; refund требует предварительное согласие freelancer. CPI подписывается order PDA и переводит только зафиксированную сумму заказа.
-- Liquidity Vault: отдельные seeds для vault/share mint/reserve, `has_one` связывает аккаунты. Пользовательские token/share accounts привязаны к подписанту и mint. Вывод сжигает собственные shares, проверяет резерв/обеспечение; overflow и нулевые суммы отклоняются. Burn и transfer атомарны. Escrow PDA не подходит как источник пользовательского депозита.
-- Типы Anchor `Account<Mint/TokenAccount>` и `Program<Token>` проверяют владельцев/программу. Единственный `UncheckedAccount` freelancer при создании используется только как публичная идентичность.
-- Swap не принимает произвольный source/vault TrustPay: ATA выводится из подписанта и mint. Devnet проверяется по genesis hash; CPMM program ID закреплён. Перепроверяются pool/vault/observation PDA. On-chain minimum защищает от движения цены после чтения RPC.
-- Существующие отрицательные тесты подтвердили отказы чужим подписантам, чужим token accounts, подменённым mint/vault и повторному/чрезмерному выводу. Новые swap-тесты проверяют привязку quote к владельцу, изменение minimum/output/direction, timestamps и посторонний mint.
+Оба mint — классические SPL-токены с 6 decimals, выпущенные учебным кошельком проекта; freeze authority отсутствует:
 
-## Security Lab: аудит, исправление и результаты
+| Токен | Mint |
+| --- | --- |
+| A | `2CLKeMqA9MJxitEwYZi1bXmQx14QXS3gCm5xSHSs5SDf` |
+| B | `2pybmyQorJG1CvyZ8eZMKgUca9BGAkze1MzQx6fR81wW` |
 
-Лаборатория завершена в безопасном объёме этого задания: исправленный учебный контракт и проверки отказа в неавторизованных действиях, только на выделенном localnet. Демонстрации успешного неавторизованного вывода не выполнялись.
+Неизвестное отображаемое имя в Phantom не является идентификатором mint: проверяются адреса. Перед тестом кошелёк получил 0,02 Devnet SOL и 5 A из свободных средств проекта. [Подготовительный перевод](https://explorer.solana.com/tx/1igjW8nNfq59PMntke5tgJbNgHCTbt8Y7j93uUJpMcojVnBNFEtwpjkgQxchVud5YR43RJs21srJR5xCNxWUYsk?cluster=devnet) не считается Phantom swap.
 
-Найденная проблема: исходный черновик `labs/security-vault/` содержал feature `vulnerable`, который выбирал контекст Withdraw без `has_one = owner`. Требование подписи и правильный PDA сами по себе не связывают подписанта с владельцем vault. Исходный default-контекст уже имел правильную проверку; исправление устраняет альтернативный небезопасный путь **во всех сборках**, а не приписывает старому default новый контроль.
+### Ранее подтверждённые программным учебным кошельком обмены
 
-Из Cargo features и Rust-кода удалён небезопасный вариант. Сборщик теперь создаёт только исправленный SBF; тестовый harness заменён регрессионными проверками отказов. Исходные учебные файлы сохранены локально в игнорируемой `.anchor/week12-original-lab/`, не включены в коммит и не запускались. Новые намеренно уязвимые программы не создавались.
+Сохранены исходные [доказательства двух CLI swap](week12-swap-evidence.json) и [повторная проверка finalized](week12-swap-reverification.json). Во время завершения ручной проверки эти обмены не повторялись.
 
-Проверены связи `Signer` → `vault.owner`, `has_one=mint`, seeds/bump vault и reserve, типизированные владельцы Anchor/SPL, `token::authority`, `token::mint` назначения и фиксированный `Program<Token>`. Сумма должна быть положительной и не больше reserve. CPI может подписать только vault PDA. Лабораторная модель — один vault на владельца, один сохранённый mint, без сторонних получателей и без повторного deposit в уже созданный vault.
+- [A → B: input 1, output 0,996511](https://explorer.solana.com/tx/34yYvSnGXxJTUnxVCyuW7bzovDBp14P8wcug9oAAeciGHGTNnDKY8Zx1amYMYkoQGRtjgk8DsWJJSZBNK7tcgN7E?cluster=devnet).
+- [B → A: input 1, output 0,998490](https://explorer.solana.com/tx/4EBbXzBYYTysG6v26iPRQcvhr5KATgCrCVUS6UvQBAgCK6H7j4ixn5xaEYRn3MDmMaemxedu68YUwgdMrLd5uHP?cluster=devnet).
 
-`npm run build:security` успешно собрал исправленный SBF **offline / locked**. `npm run test:security` завершился с кодом 0: **12 отказов + 1 успешный сценарий полного вывода**, после предварительного депозита. Каждый отрицательный тест проверяет ожидаемую ошибку и неизменность reserve/source/foreign token balances:
+## Phantom: причина несовместимости и исправление
 
-1. Чужой подписант — `ConstraintHasOne`.
-2. Отсутствие подписи владельца — `AccountNotSigner`.
-3. Перенаправление получателю — `ConstraintTokenOwner`.
-4. Неправильный mint назначения — `ConstraintTokenMint`.
-5. Подмена mint vault — `ConstraintHasOne`.
-6. Подмена vault — `AccountOwnedByWrongProgram`.
-7. Подмена reserve PDA — `ConstraintSeeds`.
-8. Неправильный владелец mint account — `AccountOwnedByWrongProgram`.
-9. Подмена SPL Token program — `InvalidProgramId`.
-10. Нулевая сумма — `InvalidAmount`.
-11. Сумма сверх reserve — `InvalidAmount`.
-12. Повторный вывод после полного разрешённого вывода — `InvalidAmount`.
+Изначально приложение требовало побайтового равенства `serializeMessage()` до и после подписи. Добавлена проверка исполняемого содержания, допускающая только эквивалентную перестановку таблицы аккаунтов: payer, blockhash, полный набор signer/writable-прав, порядок инструкций, program IDs, порядок аргументов-аккаунтов и все instruction data остаются защищены. Снимок делается до await, поэтому изменение переданного объекта на месте не обходит проверку. Подпись проверяется на фактически возвращённом message.
 
-Полный разрешённый вывод вернул владельцу 100 учебных токенов; reserve стал 0, чужой баланс остался 0. [JSON-доказательства](week12-security-evidence.json) содержат hash SBF, локальный genesis, успешные подписи и результаты проверок. Отрицательные инструкции отклоняются preflight simulation, а не обходят его через `skipPreflight`.
+Реальные данные из Chrome затем показали, что дело было **не только в представлении**: Phantom добавлял две Compute Budget инструкции перед исходными ATA и Raydium. [Точный публичный fixture](../tests/fixtures/week12-phantom-added-compute.json):
 
-Harness использует только `127.0.0.1:9899`, создаёт собственный validator/новый ledger и сверяет RPC identity с identity этого ledger. Mainnet/Devnet genesis отклоняются. Все кошельки генерируются для теста, токены выпускаются локально; ключи и ledgers не публикуются. Публичного деплоя Security Lab не было. Это ограниченный аудит и регрессии, а не независимый полный security audit.
+| Base58 data | Декодирование |
+| --- | --- |
+| `3qi1MbrtkR83` | SetComputeUnitPrice: 375000 micro-lamports/CU |
+| `Fj2Eoy` | SetComputeUnitLimit: 200000 CU |
 
-## Phantom: что проверено и что требует владельца
+Приоритетная комиссия составляла ceil(200000 × 375000 / 1000000) = 75000 lamports; с базовыми 5000 это объясняет прежнюю оценку Phantom **0,00008 SOL**. [Документация Phantom](https://github.com/phantom/docs/blob/master/development-powertools/solana-priority-fees.md) описывает добавление priority fee при подписи, если приложение не задало Compute Budget. Защита правильно блокировала непредусмотренное изменение, до отправки транзакции.
 
-В приложении подключён `PhantomWalletAdapter`; swap вызывает `requestWalletSignature` → wallet adapter `signTransaction`. Helper задаёт fee payer и свежий blockhash, запоминает message и после ответа проверяет неизменность message и действительность подписи. Ошибка/отказ очищает уведомление ожидания; до действительной подписи отправки нет.
+Исправление в `shared/swap-budget.ts`: до запроса подписи приложение задаёт **200000 CU и цену 0**, затем ATA и swap — всего 4 инструкции. Интерфейс показывает эту политику. Изменение limit/price, добавление дубликатов или любых новых инструкций после подписи по-прежнему запрещены. Ручная финализированная транзакция подтверждает, что Phantom сохранил подготовленные параметры.
 
-`npm run test:phantom:request` прошёл через **настоящий установленный adapter**, но **с синтетическим provider**, без настоящего расширения и без подписи. Проверены один вызов provider, unsigned Raydium-инструкция, правильный payer/blockhash, ATA владельца, input и minimum в байтах инструкции. Provider отклонил запрос; отказ дошёл до вызывающего кода. [Доказательство проверки границы adapter](week12-phantom-request-evidence.json). Три unit-теста дополнительно проверяют передачу транзакции и отказ от неподписанного/изменённого ответа.
+[Симуляция исправленного варианта](week12-phantom-compute-preflight.json): err=null, 38148 CU, priority fee 0. [Предыдущая симуляция](week12-phantom-preflight.json) и [проверка истории попыток](week12-phantom-attempt-check.json) сохранены для отчёта. Диагностика message до/после доступна только локально в `sessionStorage['trustpay:swap-signing-diagnostic']`; ключей и seed там нет. Offline-декодер: `node scripts/week12-decode-compute.mjs файл.json`.
 
-**Ручная подпись владельца в настоящем расширении Phantom не проверена и не заменена тестовой подписью.** Для неё:
+## Security Lab и статическая проверка
 
-1. Запустить `npm ci`, затем `npm run dev -w app`; открыть `http://127.0.0.1:5173` в браузере с Phantom. Использовать отдельный учебный кошелёк, включить test networks и выбрать Solana Devnet в настройках Phantom.
-2. Получить Devnet SOL на комиссии и свободные тестовые SPL-токены существующей пары в ATA **этого кошелька**. Использовать токены, выданные владельцем учебного mint; escrow и Liquidity Vault не трогать. Не импортировать CLI-ключ и не передавать seed-фразу.
-3. Открыть **DeFi · Raydium → Raydium Swap · Devnet**, подключить Phantom, убедиться, что публичный адрес в приложении совпадает с выбранным кошельком. Загрузить предзаполненный пул `8biZWzVLXx9AC5N2c3mJjbeGLGMRJzuDksCSibnvHsB3`.
-4. Выбрать A → B, небольшое доступное количество, slippage 50 bps; получить котировку. Проверить оба mint, ожидаемый output, minimum received и свободный баланс. При RPC-ошибке не продолжать, настроить разрешённый Devnet RPC через `VITE_DEFI_RPC_URL` и перезапустить frontend.
-5. Нажать **Подписать swap тестовых токенов**. В Phantom проверить домен, текущий кошелёк, Devnet и изменение тестовых токенов. Сначала отклонить запрос: приложение должно показать отказ, без сообщения об успехе и без отправленного swap.
-6. Получить **новую** котировку и повторно открыть запрос. Только владелец вручную подтверждает его. Quote действует 30 секунд: если истёк, получить новый; не обходить проверку срока.
-7. Дождаться подтверждения в приложении и обновления балансов. Открыть Explorer с `?cluster=devnet`, проверить отсутствие ошибки, input и output ≥ minimum. При неопределённом результате сначала проверить подпись в Explorer, затем решать о повторе.
-8. Сохранить публичную подпись и скриншоты окна подтверждения/результата без секретов. До появления этих данных ручной пункт остаётся **не проверен**.
+**Security Lab завершена в безопасном объёме задания:** исправленный учебный контракт и регрессии отказа, исключительно на изолированном localnet. Демонстрации успешной эксплуатации не проводились; публичного деплоя лаборатории не было.
 
-## Известные ограничения
+Исходный черновик содержал feature `vulnerable`, выбирающий Withdraw без `has_one=owner`. Правильный PDA и наличие произвольного Signer не связывают его с сохранённым владельцем. Default-контекст уже был исправлен; завершающее изменение удалило небезопасный feature/контекст **из всех сборок**. Исходные файлы сохранены локально в игнорируемой `.anchor/week12-original-lab/`; не публикуются и не запускаются.
 
-Реальный swap подтверждён программным учебным подписантом; end-to-end подпись в расширении Phantom вручную не проверена. Browser smoke test подтверждает отображение и адаптивность, не выполнение swap. Поддерживаются CPMM и классические SPL-токены пары; Token-2022, native SOL/wrapping, CLMM swap, маршрутизация и каталог всех пулов не реализованы. Нужны собственные тестовые токены в ATA и Devnet SOL на комиссии/создание ATA. Публичный RPC может возвращать rate limit. Неопределённый результат отправки следует проверять по подписи в Explorer перед повтором. Чтение нескольких RPC аккаунтов не является единым атомарным snapshot; окончательную защиту обеспечивает minimum в инструкции.
+В лаборатории проверены Signer → vault.owner, `has_one=mint`, PDA seeds/bump vault/reserve, владельцы типизированных аккаунтов Anchor, mint/authority token accounts, SPL Token program, положительная сумма и достаточный reserve. Модель ограничена одним vault на владельца и одним mint, без сторонних получателей и повторного deposit в уже созданный vault. Это учебный контракт, а не production vault.
 
-## Запуск
+Сборка только исправленного SBF выполняется offline/locked. Harness создаёт собственный loopback validator, новый ledger и project-owned test accounts; RPC identity сверяется с identity ledger, публичные genesis отклоняются. Отрицательные операции отклоняются preflight, балансы проверяются на неизменность. Ledgers, кошельки и бинарники не коммитятся.
+
+[Security Lab evidence](week12-security-evidence.json): **12 отказов** (чужой Signer, отсутствие подписи, чужой получатель, неправильный mint назначения, подмена mint/vault/reserve, владелец account, Token program, zero/over-reserve/repeat withdrawal) плюс **1 подтверждённый разрешённый полный вывод** после депозита. Записан hash реально протестированного SBF.
+
+Также повторно проверены исходники TrustPay и существующие контрактные регрессии:
+
+- Escrow: Signer, has_one, order/vault PDA, mint и получатель по роли; смена статусов исключает повторный вывод, refund требует согласия freelancer.
+- Liquidity Vault: отдельные PDA, связи mint/share/reserve, принадлежащие подписанту token/share accounts, burn собственных shares, backing/overflow checks и атомарность CPI. Escrow не подходит как пользовательский source.
+- Swap: Devnet genesis, закреплённый CPMM program ID, повторная проверка pool/vault/observation PDA, свободные ATA и on-chain minimum.
+
+Это ограниченный аудит исходников и регрессии, а не независимый полный security audit.
+
+## Финальные проверки
+
+| Проверка | Результат |
+| --- | --- |
+| `npm run test:unit` | **44 passing**, включая точные bytes Phantom и запрет изменения budget/получателей/сумм/прав |
+| `npx tsc --noEmit -p tsconfig.json` | Успешно |
+| `npm run build` | Успешно; прежнее предупреждение Vite о крупных chunks |
+| `npm run build:security` | Исправленный SBF собран offline/locked |
+| `npm run test:security` | 12 отказов + разрешённый вывод, exit 0 |
+| `tests/trustpay.ts` + `tests/liquidity.ts` на отдельном localnet | **23 passing** |
+| `npm run test:phantom:request` | Успешно; синтетический provider, отдельно от настоящего ручного теста |
+| `npm run test:swap:browser` | Desktop/mobile 390 px, без page errors и переполнения |
+| `node scripts/week12-verify-phantom.mjs` | Ручной swap finalized, проверены подпись, параметры и balances |
+
+TrustPay регрессии используют существующий `target/deploy/trustpay.so`; Rust-код TrustPay не изменялся и не пересобирался. Лаборатория собиралась отдельно из исправленных исходников.
+
+## RPC, запуск и воспроизведение
+
+Для ручного теста в игнорируемом `app/.env.local` заданы:
+
+```dotenv
+VITE_NETWORK=devnet
+VITE_RPC_URL=https://api.devnet.solana.com
+VITE_DEFI_RPC_URL=https://api.devnet.solana.com
+VITE_PROGRAM_ID=ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A
+```
+
+Ранее раздел проектов обращался к отсутствующему localnet `127.0.0.1:8899`: смена сети Phantom сама по себе не меняет RPC приложения. Исправлена только локальная конфигурация текущего Devnet-запуска; прежний env сохранён в `.anchor/week12-phantom-localnet.env.backup`. Из Chrome без подмены RPC проверены HTTP 200, Devnet genesis, executable программы и `order.all()` (3 аккаунта). Секреты/env не публикуются.
 
 ```sh
 npm ci
 npm run dev -w app
-```
-
-Открыть `http://127.0.0.1:5173`, вкладку **DeFi · Raydium**, форму **Raydium Swap · Devnet**. Подключить отдельный Phantom Devnet-кошелёк, загрузить пул, выбрать направление/amount/slippage, получить quote и подписать обмен. Публичный готовый пул указан в форме. CLI-ключ не импортировать в браузер.
-
-```sh
-npm run build
-npx tsc --noEmit -p tsconfig.json
-npm run test:swap
-npm run test:market
 npm run test:unit
+npx tsc --noEmit -p tsconfig.json
+npm run build
 npm run build:security
 npm run test:security
 npm run test:phantom:request
-npm run verify:swap
-npm run test:swap:rpc
-# Требует запущенного frontend и установленного Chrome:
+# С запущенным frontend и установленным Chrome:
 npm run test:swap:browser
-# Отправляет реальные тестовые Devnet-транзакции; требует существующий
-# .anchor/week09-wallet.json и его свободные тестовые токены/SOL:
-npm run test:swap:devnet
+# Только чтение подтверждённого ручного swap:
+node scripts/week12-verify-phantom.mjs 5VuPDpWkRiYfLcq5A22WfrAvFBLD2xjH5Yjjrb35KQZRmTzjpymNE8akhnAwCdDBT5b231otvq5rBvsdfA8Gb4Cw
 ```
 
-Воспроизведение обычных контрактных регрессий на отдельном localnet (существующий собранный `trustpay.so`, без лаборатории):
+Для воспроизведения ручного теста открыть `http://127.0.0.1:5173` в Chrome с Phantom, выбрать Solana Devnet и отдельный учебный кошелёк с тестовыми SOL/токенами пары. Не импортировать CLI-ключ. Загрузить предзаполненный пул, выбрать A → B, amount 1, slippage 50 bps; получить свежую quote и подтвердить запрос. Не менять заданную комиссию в Phantom: изменённый message будет отклонён. После подтверждения проверить Explorer и обновлённые балансы. Новая попытка расходует тестовые токены и не требуется для подтверждения уже записанного результата.
 
-```sh
-solana-test-validator --ledger .anchor/week12-safe-ledger --rpc-port 8909 --faucet-port 9919 --dynamic-port-range 10240-10260 --bind-address 127.0.0.1 --bpf-program ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A target/deploy/trustpay.so --quiet
-# В другом терминале, с существующим локальным тестовым кошельком:
-solana airdrop 10 .anchor/local-wallet.json --url http://127.0.0.1:8909
-ANCHOR_PROVIDER_URL=http://127.0.0.1:8909 ANCHOR_WALLET=.anchor/local-wallet.json npx ts-mocha -p tsconfig.json -t 180000 tests/trustpay.ts tests/liquidity.ts
-```
-
-## Скриншоты для отчёта
-
-Сняты с запущенного приложения, без выдуманного уведомления об успешном swap. Подтверждения реальных обменов приведены отдельно в Explorer и JSON.
+## Скриншоты и ограничения
 
 ![Desktop: форма Raydium Swap](screenshots/week12-desktop.png)
 
 ![Mobile: форма Raydium Swap, 390 px](screenshots/week12-mobile.png)
 
+Скриншоты — настоящая форма приложения; успех ручного swap подтверждается Explorer и JSON, без поддельных изображений окна Phantom.
 
-## GitHub и итоговая история
+Поддерживаются CPMM и классические SPL-токены. Token-2022, SOL wrapping, CLMM swap, маршрутизация и каталог всех пулов не реализованы и не входят в этот учебный swap. RPC может ограничивать запросы; нужен запас Devnet SOL на fee/ATA. Quote действует 30 секунд; чтения RPC не являются единым snapshot, поэтому окончательную защиту цены обеспечивает minimum в инструкции. Нулевая priority fee не гарантирует скорость включения. При неопределённом результате отправки проверять подпись до повтора.
 
-Исходный опубликованный Raydium-коммит: [`5fe787025d701a90c68275efdc275601b5295170`](https://github.com/yerkesha-A/trustpay-solana/commit/5fe787025d701a90c68275efdc275601b5295170), повторно сверен с удалённой main перед началом. Завершение Security Lab сделано в ветке `week12-complete-security-lab` от этого main. Содержимое PR подготовлено в [week12-pr.md](week12-pr.md); [создать PR из опубликованной ветки](https://github.com/yerkesha-A/trustpay-solana/compare/main...week12-complete-security-lab?expand=1). Сам PR в этом запуске не создан: GitHub-интеграция не подключена, CLI `gh` отсутствует. Merge без подтверждения владельца не выполняется.
+## GitHub
 
-Один squash-коммит, объединяющий **уже опубликованный** Raydium-коммит с новыми изменениями, получить без переписывания main нельзя. Безопасный вариант — сохранить первый коммит и добавить второй завершающий коммит (либо squash только новой PR-ветки). Тогда итоговый коммит содержит полный снимок Raydium + Security Lab, а история сохраняет два последовательных коммита недели 12. Для таблицы использовать ссылку на завершающий коммит, с честным статусом ручного Phantom-теста и merge.
+Опубликованный Raydium-коммит [`5fe787025d701a90c68275efdc275601b5295170`](https://github.com/yerkesha-A/trustpay-solana/commit/5fe787025d701a90c68275efdc275601b5295170) сохранён. Security Lab начата отдельным коммитом [`1bbb8a6be8cd031d2eebc09c17a219918c44634d`](https://github.com/yerkesha-A/trustpay-solana/commit/1bbb8a6be8cd031d2eebc09c17a219918c44634d). Исправления настоящей ручной интеграции и итоговый отчёт добавлены в той же ветке `week12-complete-security-lab`. Владелец разрешил обычный merge в main после успешных финальных проверок; force push и переписывание опубликованных коммитов не используются. Итоговый merge-коммит содержит полный результат недели 12; неделя 13 не начиналась.

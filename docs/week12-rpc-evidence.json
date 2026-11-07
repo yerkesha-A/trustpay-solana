@@ -1,13 +1,13 @@
 {
   "network": "devnet",
-  "checkedAt": "2026-11-07T16:34:13.191Z",
+  "checkedAt": "2026-11-07T16:56:38.653Z",
   "transactionsSent": 0,
   "confirmedSwap": null,
   "pool": "8biZWzVLXx9AC5N2c3mJjbeGLGMRJzuDksCSibnvHsB3",
-  "slot": 519721607,
+  "slot": 519727233,
   "reserves": [
-    "1006000000",
-    "1006000000"
+    "1006001110",
+    "1006003089"
   ],
   "mints": [
     "2CLKeMqA9MJxitEwYZi1bXmQx14QXS3gCm5xSHSs5SDf",
@@ -17,14 +17,14 @@
   "quotes": [
     {
       "input": "1000000",
-      "output": "996511",
-      "minimum": "991528",
+      "output": "996513",
+      "minimum": "991530",
       "bps": 50
     },
     {
       "input": "1000000",
-      "output": "996511",
-      "minimum": "991528",
+      "output": "996509",
+      "minimum": "991526",
       "bps": 50
     }
   ],
