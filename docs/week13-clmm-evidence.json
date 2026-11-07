@@ -1,0 +1,37 @@
+{
+  "network": "devnet",
+  "checkedAt": "2026-11-07T18:02:08.078Z",
+  "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+  "pool": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+  "operations": [
+    {
+      "operation": "open",
+      "status": "confirmed",
+      "signature": "3f8EThc9VMFheWcGK7bBMpDzA2SqnPWcNd3zv3SSuwgUoBdcQFo9fdogFrGVPos3MhuSAyj317e9iMq9Gsb61CgT"
+    },
+    {
+      "operation": "increase",
+      "status": "confirmed",
+      "signature": "3Wst1XcrbcqN7BW5iJ3ZRkDyfaoVPTot6n6wPtSbam4dSfG5XbKiuTKD2P1kFRXmMqGWspZhcTbh6ufz1CyK3UY3"
+    },
+    {
+      "operation": "collect fees",
+      "status": "confirmed",
+      "signature": "3Mg9awVWMbnpKjrHYFK3SodSuWyiMpn6bKddXDwL2GGuBfunz5Txnxde859zC8QgXv826CysVq6djBn8fy72Ehem"
+    },
+    {
+      "operation": "decrease half",
+      "status": "confirmed",
+      "signature": "qNVeRfGQvEkTQEkPhnWt6Yr6EcVtBMXNp8DiqdMBkf3vXCo5as2E5RyvQ8c4pSwhCTu9Qa544z9SifDEqzmKiaM"
+    },
+    {
+      "operation": "decrease all and close",
+      "status": "confirmed",
+      "signature": "fkqh8s63N57ReyDeC9j6piqcLynRqVVcZ5XzuGn7wvqQuKwiN61rSBecFmtLNniQZuQDVMhNvHAkgbuqJHicfe6"
+    }
+  ],
+  "nftMint": "39Xe7gkRMBzr3LKLp22yMSvnuwzkmDPshhjLrSqwDPJc",
+  "initialLiquidity": "189292960",
+  "closed": true,
+  "status": "passed"
+}

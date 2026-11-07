@@ -1,0 +1,30 @@
+{
+  "network": "devnet",
+  "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+  "signatures": [
+    {
+      "operation": "mint test tokens",
+      "signature": "3pvgRvGeRZnpXeKxDeAUWEYcTSMGktqzRs39F9vBeN4RasLwgUSxnUbW66XSUAZhfpBUx6koa93N6gdVrihxksPb",
+      "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY"
+    },
+    {
+      "operation": "mint test tokens",
+      "signature": "5SfuxNfwtmi7uA1EFgnA7HDYjc1f4XtTbL8WFr8EcSKiQmcpCnz849GXspGzeF5GFX9heGPiWgW8Xwh82cwP2qMr",
+      "mint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM"
+    },
+    {
+      "operation": "create CLMM pool",
+      "signature": "5qDREfHrGaPstZCtZ7Rgdpamiz2AcZGC1NaGiJaTYTbT7vP6diWe3Sa2uw4faeb8XZyk3qcmEvahkjPotgShqQ56"
+    }
+  ],
+  "stableMint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+  "assetMint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+  "funded:5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY": true,
+  "funded:BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM": true,
+  "config": "CD4aJtX11cqTCAc83nxSPkkh5JW2yjD6uwHeovjqQ1qu",
+  "pool": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+  "mintA": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+  "mintB": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+  "tickSpacing": 60,
+  "price": "1"
+}

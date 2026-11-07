@@ -1,0 +1,346 @@
+{
+  "network": "devnet",
+  "checkedAt": "2026-11-07T18:08:11.328Z",
+  "manualPhantom": "not verified for week13",
+  "transactionsSent": 0,
+  "transactions": [
+    {
+      "operation": "open",
+      "signature": "3f8EThc9VMFheWcGK7bBMpDzA2SqnPWcNd3zv3SSuwgUoBdcQFo9fdogFrGVPos3MhuSAyj317e9iMq9Gsb61CgT",
+      "status": "finalized",
+      "slot": 519743660,
+      "feeLamports": 10000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "DRayAUgENGQBKVaX8owNhgzkEDyoHTGVEGHVJT1E9pfH"
+      ],
+      "tokenChanges": [
+        {
+          "owner": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "8871012"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "-8871012"
+        },
+        {
+          "owner": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+          "mint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+          "change": "9950248"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+          "change": "-9950248"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "39Xe7gkRMBzr3LKLp22yMSvnuwzkmDPshhjLrSqwDPJc",
+          "change": "1"
+        }
+      ]
+    },
+    {
+      "operation": "increase",
+      "signature": "3Wst1XcrbcqN7BW5iJ3ZRkDyfaoVPTot6n6wPtSbam4dSfG5XbKiuTKD2P1kFRXmMqGWspZhcTbh6ufz1CyK3UY3",
+      "status": "finalized",
+      "slot": 519743688,
+      "feeLamports": 5000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "DRayAUgENGQBKVaX8owNhgzkEDyoHTGVEGHVJT1E9pfH"
+      ],
+      "tokenChanges": [
+        {
+          "owner": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "1774202"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "-1774202"
+        },
+        {
+          "owner": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+          "mint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+          "change": "1990049"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+          "change": "-1990049"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "39Xe7gkRMBzr3LKLp22yMSvnuwzkmDPshhjLrSqwDPJc",
+          "change": "0"
+        }
+      ]
+    },
+    {
+      "operation": "collect fees",
+      "signature": "3Mg9awVWMbnpKjrHYFK3SodSuWyiMpn6bKddXDwL2GGuBfunz5Txnxde859zC8QgXv826CysVq6djBn8fy72Ehem",
+      "status": "finalized",
+      "slot": 519743714,
+      "feeLamports": 5000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "DRayAUgENGQBKVaX8owNhgzkEDyoHTGVEGHVJT1E9pfH"
+      ],
+      "tokenChanges": [
+        {
+          "owner": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "0"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "0"
+        },
+        {
+          "owner": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+          "mint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+          "change": "0"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+          "change": "0"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "39Xe7gkRMBzr3LKLp22yMSvnuwzkmDPshhjLrSqwDPJc",
+          "change": "0"
+        }
+      ]
+    },
+    {
+      "operation": "decrease half",
+      "signature": "qNVeRfGQvEkTQEkPhnWt6Yr6EcVtBMXNp8DiqdMBkf3vXCo5as2E5RyvQ8c4pSwhCTu9Qa544z9SifDEqzmKiaM",
+      "status": "finalized",
+      "slot": 519743740,
+      "feeLamports": 5000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "DRayAUgENGQBKVaX8owNhgzkEDyoHTGVEGHVJT1E9pfH"
+      ],
+      "tokenChanges": [
+        {
+          "owner": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "-5322606"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "5322606"
+        },
+        {
+          "owner": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+          "mint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+          "change": "-5970148"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+          "change": "5970148"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "39Xe7gkRMBzr3LKLp22yMSvnuwzkmDPshhjLrSqwDPJc",
+          "change": "0"
+        }
+      ]
+    },
+    {
+      "operation": "decrease all and close",
+      "signature": "fkqh8s63N57ReyDeC9j6piqcLynRqVVcZ5XzuGn7wvqQuKwiN61rSBecFmtLNniQZuQDVMhNvHAkgbuqJHicfe6",
+      "status": "finalized",
+      "slot": 519743765,
+      "feeLamports": 5000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "DRayAUgENGQBKVaX8owNhgzkEDyoHTGVEGHVJT1E9pfH",
+        "DRayAUgENGQBKVaX8owNhgzkEDyoHTGVEGHVJT1E9pfH"
+      ],
+      "tokenChanges": [
+        {
+          "owner": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "-5322606"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "5322606"
+        },
+        {
+          "owner": "5cFqhGMgSbsNMJeU1WGgPLQDA3gL3cJh3BsX2LpoStZ9",
+          "mint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+          "change": "-5970148"
+        },
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "BsKMeVfWT4xLJKPAyT4CUVREJpaDWa1AzGq4PWsdgKAM",
+          "change": "5970148"
+        }
+      ]
+    },
+    {
+      "operation": "fund temporary worker",
+      "signature": "4LmX124sh8SEQguAeU2y38zd2EL84wDhfobZcH8aPWxiSyeqHwJmE2jEzRDWFfAE7c592M2xC3kUrjvtgsLQXLwS",
+      "status": "finalized",
+      "slot": 519744292,
+      "feeLamports": 5000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "11111111111111111111111111111111"
+      ],
+      "tokenChanges": []
+    },
+    {
+      "operation": "deposit payment",
+      "signature": "4vLDGeoenRmzXCrxgif6ceDhEhnwT3b92jCLPmkSahY8NUswVBE88M65hRxWW3t1BkNftzYCDKTFLKnJJx6WJYkW",
+      "status": "finalized",
+      "slot": 519744311,
+      "feeLamports": 5000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A"
+      ],
+      "tokenChanges": [
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "-1000000"
+        },
+        {
+          "owner": "Gcvz6Hs1ycTNCjxYqhJaoitS5quirr8JWBX17daHzEhs",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "1000000"
+        }
+      ]
+    },
+    {
+      "operation": "submit work",
+      "signature": "5UEBSxADjiZPbvHAy9cxNfh3x8YktutcR5nna5moDVZFmUhGqj3dYvqinHZ6B1dEjuaozEVKp1Q6MnK72t7AtWLd",
+      "status": "finalized",
+      "slot": 519744331,
+      "feeLamports": 5000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A"
+      ],
+      "tokenChanges": []
+    },
+    {
+      "operation": "release payment",
+      "signature": "HqHf9fGJD3sZZDEVTxwoni8dnDS4ii2kTq6CaJ1RXyb7semxs63mY6WgMwxqd8aRVNUzmX74txckYnt2gFhTgkz",
+      "status": "finalized",
+      "slot": 519744341,
+      "feeLamports": 5000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A"
+      ],
+      "tokenChanges": [
+        {
+          "owner": "7cf5Fq25SMsW2eSJttp6nbAt8PcmHbZT86TbnmRzfH7Z",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "1000000"
+        },
+        {
+          "owner": "Gcvz6Hs1ycTNCjxYqhJaoitS5quirr8JWBX17daHzEhs",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "-1000000"
+        }
+      ]
+    },
+    {
+      "operation": "deposit refundable payment",
+      "signature": "5C6fd3ViXAN3dJ3m1pTejXxQ1Ck5prprE7zAG5dLwFGLCJQRcDEQuyzWMZDjzyonbGMpFhXGigH7kCCLWi8n6bGV",
+      "status": "finalized",
+      "slot": 519744369,
+      "feeLamports": 5000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A"
+      ],
+      "tokenChanges": [
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "-2000000"
+        },
+        {
+          "owner": "EsorFDTy5YZXgDLLw29bvdgKuDkbmczW84orVzWquvmA",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "2000000"
+        }
+      ]
+    },
+    {
+      "operation": "allow cancellation",
+      "signature": "4nFKTeDAQypAQYZ9YzZ3dsw7FvrdKuGfDA5DCwZM1b5yN6KWBbdUcoPygcnZ41GoB1fBeutMEHZJq6CCLz17UzfC",
+      "status": "finalized",
+      "slot": 519744384,
+      "feeLamports": 5000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A"
+      ],
+      "tokenChanges": []
+    },
+    {
+      "operation": "refund payment",
+      "signature": "W5T4UfLFiyqfWwzxpHhbxvkww7UiGzaqtbEyuUvrgJA5raroN1bdnyVwcehzJ2wEWUEpoEmHMdks5GjvgbcszGZ",
+      "status": "finalized",
+      "slot": 519744395,
+      "feeLamports": 5000,
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A"
+      ],
+      "tokenChanges": [
+        {
+          "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "2000000"
+        },
+        {
+          "owner": "EsorFDTy5YZXgDLLw29bvdgKuDkbmczW84orVzWquvmA",
+          "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+          "change": "-2000000"
+        }
+      ]
+    }
+  ]
+}

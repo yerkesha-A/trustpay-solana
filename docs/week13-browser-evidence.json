@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-11-07T18:11:39.426Z",
+  "rpc": "real Devnet responses forwarded through Node",
+  "wallet": "synthetic rejection provider, not a manual Phantom approval",
+  "requests": [
+    {
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A"
+      ],
+      "payer": "2mxYEEpyuuo1msxRXGB4wWNqeCeaPSrcywcw2Qq7tEab",
+      "signatures": [
+        {
+          "key": "2mxYEEpyuuo1msxRXGB4wWNqeCeaPSrcywcw2Qq7tEab",
+          "present": false
+        }
+      ]
+    },
+    {
+      "programs": [
+        "ComputeBudget111111111111111111111111111111",
+        "ComputeBudget111111111111111111111111111111",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+        "DRayAUgENGQBKVaX8owNhgzkEDyoHTGVEGHVJT1E9pfH"
+      ],
+      "payer": "2mxYEEpyuuo1msxRXGB4wWNqeCeaPSrcywcw2Qq7tEab",
+      "signatures": [
+        {
+          "key": "2mxYEEpyuuo1msxRXGB4wWNqeCeaPSrcywcw2Qq7tEab",
+          "present": false
+        },
+        {
+          "key": "BKuxXBvUZfFXvA5wV6TVv6STDxqPmearWodatar94Qv8",
+          "present": true
+        }
+      ]
+    }
+  ],
+  "desktopAndMobile": true,
+  "pageErrors": [],
+  "transactionsSent": 0
+}

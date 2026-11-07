@@ -9,6 +9,7 @@ Escrow-платежи на Solana. Anchor, React, TypeScript и Phantom.
 - Liquidity Vault 1:1 и RPC Dashboard.
 - Расчёты AMM и диапазонов CLMM.
 - Raydium Swap и проверка безопасности vault.
+- Mock USD Payments и управление CLMM-позициями.
 
 ## Запуск
 
@@ -42,3 +43,6 @@ npm run test:security
 - [Vault и RPC Dashboard](docs/week10.md)
 - [AMM / CLMM](docs/week11.md)
 - [Swap и Security Lab](docs/week12.md)
+- [Mock USD Payments и CLMM Positions](docs/week13.md)
+
+Неделя 13: Devnet payment/CLMM циклы проверены программными подписантами; ручная проверка новых операций Phantom ожидается. Mock USD — тестовая имитация, не USDC и не обеспеченный резервами актив.

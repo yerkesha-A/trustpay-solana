@@ -1,0 +1,70 @@
+{
+  "network": "devnet",
+  "checkedAt": "2026-11-07T18:04:40.995Z",
+  "mockStablecoin": true,
+  "reserveBacking": false,
+  "mint": "5LEMrHKh1Z8a6qsj1BNYNzBpjq1PeVaDVxW1kMHGqnRY",
+  "client": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+  "worker": "7cf5Fq25SMsW2eSJttp6nbAt8PcmHbZT86TbnmRzfH7Z",
+  "operations": [
+    {
+      "operation": "fund temporary worker",
+      "status": "confirmed",
+      "signature": "4LmX124sh8SEQguAeU2y38zd2EL84wDhfobZcH8aPWxiSyeqHwJmE2jEzRDWFfAE7c592M2xC3kUrjvtgsLQXLwS"
+    },
+    {
+      "operation": "deposit payment",
+      "status": "confirmed",
+      "signature": "4vLDGeoenRmzXCrxgif6ceDhEhnwT3b92jCLPmkSahY8NUswVBE88M65hRxWW3t1BkNftzYCDKTFLKnJJx6WJYkW"
+    },
+    {
+      "operation": "unauthorized release",
+      "status": "rejected",
+      "error": "Error: Нет полномочий для этой операции."
+    },
+    {
+      "operation": "submit work",
+      "status": "confirmed",
+      "signature": "5UEBSxADjiZPbvHAy9cxNfh3x8YktutcR5nna5moDVZFmUhGqj3dYvqinHZ6B1dEjuaozEVKp1Q6MnK72t7AtWLd"
+    },
+    {
+      "operation": "release payment",
+      "status": "confirmed",
+      "signature": "HqHf9fGJD3sZZDEVTxwoni8dnDS4ii2kTq6CaJ1RXyb7semxs63mY6WgMwxqd8aRVNUzmX74txckYnt2gFhTgkz"
+    },
+    {
+      "operation": "repeat release",
+      "status": "rejected",
+      "error": "Error: Операция недоступна в текущем статусе."
+    },
+    {
+      "operation": "deposit refundable payment",
+      "status": "confirmed",
+      "signature": "5C6fd3ViXAN3dJ3m1pTejXxQ1Ck5prprE7zAG5dLwFGLCJQRcDEQuyzWMZDjzyonbGMpFhXGigH7kCCLWi8n6bGV"
+    },
+    {
+      "operation": "refund without worker consent",
+      "status": "rejected",
+      "error": "Error: Операция недоступна в текущем статусе."
+    },
+    {
+      "operation": "allow cancellation",
+      "status": "confirmed",
+      "signature": "4nFKTeDAQypAQYZ9YzZ3dsw7FvrdKuGfDA5DCwZM1b5yN6KWBbdUcoPygcnZ41GoB1fBeutMEHZJq6CCLz17UzfC"
+    },
+    {
+      "operation": "refund payment",
+      "status": "confirmed",
+      "signature": "W5T4UfLFiyqfWwzxpHhbxvkww7UiGzaqtbEyuUvrgJA5raroN1bdnyVwcehzJ2wEWUEpoEmHMdks5GjvgbcszGZ"
+    },
+    {
+      "operation": "repeat refund",
+      "status": "rejected",
+      "error": "Error: Операция недоступна в текущем статусе."
+    }
+  ],
+  "releaseOrder": "Gcvz6Hs1ycTNCjxYqhJaoitS5quirr8JWBX17daHzEhs",
+  "refundOrder": "EsorFDTy5YZXgDLLw29bvdgKuDkbmczW84orVzWquvmA",
+  "balancesChecked": true,
+  "status": "passed"
+}

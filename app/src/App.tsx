@@ -33,6 +33,8 @@ import RpcSectionBoundary from "./RpcSectionBoundary";
 const RpcDashboard = lazy(() => import("./RpcDashboard"));
 const LiquidityPanel = lazy(() => import("./LiquidityPanel"));
 const DeFiPanel = lazy(() => import("./DeFiPanel"));
+const PaymentsPanel = lazy(() => import("./PaymentsPanel"));
+const PositionsPanel = lazy(() => import("./PositionsPanel"));
 const labels: Record<string, string> = {
   funded: "В работе",
   submitted: "На проверке",
@@ -43,7 +45,7 @@ const labels: Record<string, string> = {
 export default function App() {
   const wallet = useAnchorWallet();
   const [view, setView] = useState<
-    "projects" | "defi" | "dashboard" | "liquidity"
+    "projects" | "defi" | "dashboard" | "liquidity" | "payments" | "positions"
   >("projects");
   const [role, setRole] = useState<"client" | "freelancer">("client"),
     [orders, setOrders] = useState<Order[]>([]),
@@ -214,6 +216,8 @@ export default function App() {
         >
           <LayoutDashboard size={19} /> RPC Dashboard <span>↗</span>
         </button>
+        <button className={view === "payments" ? "nav active" : "nav"} onClick={() => setView("payments")}><Wallet size={19} /> Stablecoin Payments <span>↗</span></button>
+        <button className={view === "positions" ? "nav active" : "nav"} onClick={() => setView("positions")}><ArrowUpRight size={19} /> CLMM Positions <span>↗</span></button>
         <div className="sidebar-bottom">
           <div className="security">
             <LockKeyhole size={21} />
@@ -232,7 +236,7 @@ export default function App() {
         <header>
           <div className="breadcrumb">
             Workspace <span>/</span>{" "}
-            {view === "liquidity"
+            {view === "payments" ? "Stablecoin Payments" : view === "positions" ? "CLMM Positions" : view === "liquidity"
               ? "DeFi / Liquidity"
               : view === "dashboard"
                 ? "RPC Dashboard"
@@ -253,6 +257,8 @@ export default function App() {
         </header>
         <div className="content">
           <div className="mobile-sections">
+            <button onClick={() => setView("payments")}>Stablecoin Payments</button>
+            <button onClick={() => setView("positions")}>CLMM Positions</button>
             <button onClick={() => setView("projects")}>Проекты</button>
             <button onClick={() => setView("defi")}>DeFi · Raydium</button>
             <button onClick={() => setView("dashboard")}>RPC Dashboard</button>
@@ -260,7 +266,11 @@ export default function App() {
               DeFi / Liquidity
             </button>
           </div>
-          {view === "liquidity" ? (
+          {view === "payments" || view === "positions" ? (
+            <RpcSectionBoundary key={view}><Suspense fallback={<p>Загрузка…</p>}>
+              {view === "payments" ? <PaymentsPanel key={wallet?.publicKey.toBase58() || "disconnected"}/> : <PositionsPanel key={wallet?.publicKey.toBase58() || "disconnected"}/>}
+            </Suspense></RpcSectionBoundary>
+          ) : view === "liquidity" ? (
             <RpcSectionBoundary key="liquidity">
               <Suspense fallback={<p>Загрузка Liquidity…</p>}>
                 <LiquidityPanel

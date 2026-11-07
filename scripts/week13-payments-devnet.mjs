@@ -1,0 +1,45 @@
+import {createRequire} from 'node:module';
+import {readFileSync,writeFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+const require=createRequire(import.meta.url);
+require('ts-node').register({project:'tsconfig.json'});
+const {Connection,Keypair,PublicKey,SystemProgram}=require('@solana/web3.js');
+const {Wallet,BN}=require('@coral-xyz/anchor');
+const {buildPayment,buildPaymentAction,stablecoinBalance,paymentProgram}=require('../shared/payments.ts');
+const {sendWeek13Transaction,week13Transaction}=require('../shared/transactions.ts');
+const {WEEK13}=require('../shared/week13-config.ts');
+if(process.env.TRUSTPAY_WEEK13_DEVNET!=='1')throw Error('Set TRUSTPAY_WEEK13_DEVNET=1 for test payments');
+const c=new Connection('https://api.devnet.solana.com',{commitment:'confirmed',fetch:require('./devnet-fetch.cjs'),disableRetryOnRateLimit:true});
+const payer=Keypair.fromSecretKey(Uint8Array.from(JSON.parse(readFileSync('.anchor/week09-wallet.json','utf8'))));
+const worker=Keypair.generate();
+writeFileSync('.anchor/week13-test-worker.json',JSON.stringify(Array.from(worker.secretKey)),{mode:0o600});
+const clientWallet=new Wallet(payer),workerWallet=new Wallet(worker),idl=JSON.parse(readFileSync('app/src/idl.json','utf8'));
+const evidence={network:'devnet',checkedAt:new Date().toISOString(),mockStablecoin:true,reserveBacking:false,mint:WEEK13.stableMint,client:payer.publicKey.toBase58(),worker:worker.publicKey.toBase58(),operations:[]};
+const save=()=>writeFileSync('docs/week13-payments-evidence.json',JSON.stringify(evidence,null,2)+'\n');
+const send=async(operation,wallet,tx)=>{
+ const row={operation,status:'pending'};evidence.operations.push(row);save();
+ const signature=await sendWeek13Transaction(c,wallet,tx,[],s=>{row.signature=s;save();});row.status='confirmed';save();console.log(operation,signature);
+};
+const rejects=async(fn,name)=>{let failure;try{await fn();}catch(e){failure=String(e);}assert(failure,name+' unexpectedly succeeded');evidence.operations.push({operation:name,status:'rejected',error:failure});save();};
+try{
+ await send('fund temporary worker',clientWallet,week13Transaction().add(SystemProgram.transfer({fromPubkey:payer.publicKey,toPubkey:worker.publicKey,lamports:10_000_000})));
+ const before=await stablecoinBalance(c,payer.publicKey);
+ const one=await buildPayment(c,clientWallet,idl,worker.publicKey,'1','Mock USD payment',new BN(Date.now().toString()));
+ await send('deposit payment',clientWallet,one.transaction);
+ assert.equal(await stablecoinBalance(c,payer.publicKey),before-1000000n);
+ await rejects(()=>buildPaymentAction(c,workerWallet,idl,one.order,'release'),'unauthorized release');
+ await send('submit work',workerWallet,await buildPaymentAction(c,workerWallet,idl,one.order,'submitWork'));
+ await send('release payment',clientWallet,await buildPaymentAction(c,clientWallet,idl,one.order,'release'));
+ assert.equal(await stablecoinBalance(c,worker.publicKey),1000000n);
+ await rejects(()=>buildPaymentAction(c,clientWallet,idl,one.order,'release'),'repeat release');
+ const two=await buildPayment(c,clientWallet,idl,worker.publicKey,'2','Mock USD refund',new BN((Date.now()+1).toString()));
+ const beforeCancel=await stablecoinBalance(c,payer.publicKey);
+ await send('deposit refundable payment',clientWallet,two.transaction);
+ await rejects(()=>buildPaymentAction(c,clientWallet,idl,two.order,'refund'),'refund without worker consent');
+ await send('allow cancellation',workerWallet,await buildPaymentAction(c,workerWallet,idl,two.order,'allowCancel'));
+ await send('refund payment',clientWallet,await buildPaymentAction(c,clientWallet,idl,two.order,'refund'));
+ assert.equal(await stablecoinBalance(c,payer.publicKey),beforeCancel);
+ await rejects(()=>buildPaymentAction(c,clientWallet,idl,two.order,'refund'),'repeat refund');
+ evidence.releaseOrder=one.order.toBase58();evidence.refundOrder=two.order.toBase58();
+ evidence.balancesChecked=true;evidence.status='passed';save();
+}catch(e){evidence.status='failed';evidence.error=String(e);save();console.error(e);process.exitCode=1;}finally{c._rpcWebSocket.close();}

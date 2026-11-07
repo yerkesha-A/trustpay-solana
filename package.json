@@ -33,7 +33,13 @@
     "test:security": "node tests/security-lab.mjs",
     "test:unit": "ts-mocha -p tsconfig.json tests/defi-math.ts tests/market-math.ts tests/rpc.ts tests/swap.ts tests/wallet-signing.ts",
     "test:phantom:request": "node tests/phantom-request.mjs",
-    "verify:swap": "node scripts/week12-verify-swaps.mjs"
+    "verify:swap": "node scripts/week12-verify-swaps.mjs",
+    "test:week13": "ts-mocha -p tsconfig.json tests/week13.ts",
+    "setup:week13": "node scripts/week13-setup.mjs",
+    "test:week13:payments:devnet": "TRUSTPAY_WEEK13_DEVNET=1 node scripts/week13-payments-devnet.mjs",
+    "test:week13:clmm:devnet": "TRUSTPAY_WEEK13_DEVNET=1 node scripts/week13-clmm-devnet.mjs",
+    "test:week13:browser": "node tests/browser-week13.mjs",
+    "verify:week13": "node scripts/week13-verify.mjs"
   },
   "dependencies": {
     "@coral-xyz/anchor": "0.31.1",

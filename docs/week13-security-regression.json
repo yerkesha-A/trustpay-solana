@@ -1,0 +1,93 @@
+{
+  "network": "isolated localnet only",
+  "verifiedAt": "2026-11-07T18:08:43.231Z",
+  "program": "BJgBQA7UGzQQuPWVn16Qw931M5LfLaBh3Taid77BLpTw",
+  "artifactSha256": "ad118e6758e87136079f667754147550c987a202ea564f699fb6080aadfdb1e7",
+  "cases": [
+    {
+      "name": "foreign signer",
+      "result": "rejected",
+      "constraint": "ConstraintHasOne",
+      "balancesUnchanged": true
+    },
+    {
+      "name": "missing owner signature",
+      "result": "rejected",
+      "constraint": "AccountNotSigner",
+      "balancesUnchanged": true
+    },
+    {
+      "name": "redirected destination",
+      "result": "rejected",
+      "constraint": "ConstraintTokenOwner",
+      "balancesUnchanged": true
+    },
+    {
+      "name": "wrong destination mint",
+      "result": "rejected",
+      "constraint": "ConstraintTokenMint",
+      "balancesUnchanged": true
+    },
+    {
+      "name": "substituted mint",
+      "result": "rejected",
+      "constraint": "ConstraintHasOne",
+      "balancesUnchanged": true
+    },
+    {
+      "name": "substituted vault PDA",
+      "result": "rejected",
+      "constraint": "AccountOwnedByWrongProgram",
+      "balancesUnchanged": true
+    },
+    {
+      "name": "substituted reserve PDA",
+      "result": "rejected",
+      "constraint": "ConstraintSeeds",
+      "balancesUnchanged": true
+    },
+    {
+      "name": "wrong account owner",
+      "result": "rejected",
+      "constraint": "AccountOwnedByWrongProgram",
+      "balancesUnchanged": true
+    },
+    {
+      "name": "substituted token program",
+      "result": "rejected",
+      "constraint": "InvalidProgramId",
+      "balancesUnchanged": true
+    },
+    {
+      "name": "zero withdrawal",
+      "result": "rejected",
+      "constraint": "InvalidAmount",
+      "balancesUnchanged": true
+    },
+    {
+      "name": "over reserve withdrawal",
+      "result": "rejected",
+      "constraint": "InvalidAmount",
+      "balancesUnchanged": true
+    },
+    {
+      "name": "authorized full withdrawal",
+      "result": "confirmed",
+      "balances": [
+        "0",
+        "100000000",
+        "0"
+      ]
+    },
+    {
+      "name": "repeat withdrawal",
+      "result": "rejected",
+      "constraint": "InvalidAmount",
+      "balancesUnchanged": true
+    }
+  ],
+  "genesis": "BuaULs9SpgZjsTeU7TXS7dVAT2yUnsTaetZmE4xh4YW1",
+  "depositSignature": "2dAuR6G3WHgcV7ba8CVyDTEmzYCsJQLQukLpyEFEpmYCSPbR5mbr1ALk4GRULmqunmuiRNSd32BVb9PqiSuYHhS7",
+  "withdrawSignature": "3Mve8rK9gxxAXsaA6huugSF4bhzwrc76fbcZjd2Nh4s9GhETwsYn8c8aDKGhXfLigvbVc6KQPKdzin98TgD5JmMb",
+  "status": "passed"
+}

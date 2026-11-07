@@ -1,0 +1,8 @@
+{
+  "network": "devnet",
+  "owner": "2mxYEEpyuuo1msxRXGB4wWNqeCeaPSrcywcw2Qq7tEab",
+  "signature": "GjJdExLJXpzU8RCDvVh5h8ExkLGLF2ur6exBFs8ZokAyNphCv7YGn2paySJKcjuwLoQUEavDrLkwpPEqZocwb4x",
+  "purpose": "test funding only; not a Phantom payment or CLMM signature",
+  "targetSol": 0.1,
+  "targetMockTokensEach": "10"
+}
