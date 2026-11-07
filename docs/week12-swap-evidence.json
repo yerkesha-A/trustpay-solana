@@ -1,0 +1,40 @@
+{
+  "network": "devnet",
+  "checkedAt": "2026-11-07T16:38:20.856Z",
+  "owner": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+  "pool": "8biZWzVLXx9AC5N2c3mJjbeGLGMRJzuDksCSibnvHsB3",
+  "transactions": [
+    {
+      "direction": "A → B",
+      "signature": "34yYvSnGXxJTUnxVCyuW7bzovDBp14P8wcug9oAAeciGHGTNnDKY8Zx1amYMYkoQGRtjgk8DsWJJSZBNK7tcgN7E",
+      "status": "confirmed",
+      "input": "1000000",
+      "minimum": "991528",
+      "before": [
+        "8977500000",
+        "8994000000"
+      ],
+      "after": [
+        "8976500000",
+        "8994996511"
+      ],
+      "balanceChecks": "exact input and minimum output passed"
+    },
+    {
+      "direction": "B → A",
+      "signature": "4EBbXzBYYTysG6v26iPRQcvhr5KATgCrCVUS6UvQBAgCK6H7j4ixn5xaEYRn3MDmMaemxedu68YUwgdMrLd5uHP",
+      "status": "confirmed",
+      "input": "1000000",
+      "minimum": "993497",
+      "before": [
+        "8976500000",
+        "8994996511"
+      ],
+      "after": [
+        "8977498490",
+        "8993996511"
+      ],
+      "balanceChecks": "exact input and minimum output passed"
+    }
+  ]
+}

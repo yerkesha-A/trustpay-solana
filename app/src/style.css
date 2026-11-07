@@ -1249,3 +1249,15 @@ footer span:last-child {
 .market-limitation {padding:24px;border-top:1px solid var(--line);}.market-limitation strong {font-size:13px;}
 .range-track {display:flex;justify-content:space-between;gap:12px;padding:18px;background:var(--paper);border-radius:8px;flex-wrap:wrap;font-size:12px;}
 @media(max-width:700px) {.market-catalog {grid-template-columns:1fr;}.liquidity-page .section-heading {flex-wrap:wrap;gap:14px;}.liquidity-page .pool-form,.liquidity-page .liquidity-form {flex-direction:column;align-items:stretch;}.liquidity-page .defi-assets {grid-template-columns:1fr;}.liquidity-page .pool-form label {min-width:0;}.liquidity-page .defi-quote dl>div {flex-direction:column;gap:6px;}.liquidity-page .defi-quote dd {margin:0;}.mobile-sections {flex-wrap:wrap;}}
+
+/* Week 12: swap form shares the DeFi layout and stays usable on mobile. */
+.swap-card { margin-top: 24px; }
+.swap-card > h2 { margin: 24px 25px 12px; font-size: 20px; }
+.swap-card > p { margin: 12px 25px 20px; font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.swap-card .liquidity-form { flex-wrap: wrap; }
+.swap-card .liquidity-form label { min-width: 140px; }
+.swap-card select { display: block; width: 100%; margin-top: 8px; padding: 12px; background: var(--paper); color: inherit; border: 1px solid var(--line); border-radius: 7px; }
+@media (max-width: 700px) {
+  .swap-card .liquidity-form { flex-direction: column; align-items: stretch; }
+  .swap-card .liquidity-form label { min-width: 0; }
+}

@@ -1,6 +1,6 @@
 # TrustPay — Decentralized Freelance Escrow
 
-Университетский проект на Solana. Реализованы **недели 8–11**: escrow MVP и реальная DeFi-интеграция Raydium CPMM, проверенная на Devnet. Неделя 10: изолированный Liquidity Vault 1:1 и RPC Dashboard, проверенные реальными Devnet-транзакциями. Неделя 11 добавляет AMM/CLMM-аналитику и проверку композиции CPI. Недели 12–15 ожидают отдельного разрешения. Только Localnet / Devnet и тестовые SPL-токены. Mainnet не используется.
+Университетский проект на Solana. Реализованы **недели 8–11**: escrow MVP и реальная DeFi-интеграция Raydium CPMM, проверенная на Devnet. Неделя 10: изолированный Liquidity Vault 1:1 и RPC Dashboard, проверенные реальными Devnet-транзакциями. Неделя 11 добавляет AMM/CLMM-аналитику и проверку композиции CPI. Неделя 12 добавляет Raydium Swap с подтверждёнными Devnet-обменами; Security Lab не завершена, поэтому неделя 12 выполнена частично. Недели 13–15 не начаты. Только Localnet / Devnet и тестовые SPL-токены. Mainnet не используется.
 
 ## Архитектура
 
@@ -166,3 +166,10 @@ npm run test:market:browser
 ```
 
 Сеть задаётся существующим `VITE_DEFI_RPC_URL` (Devnet/Helius Devnet); каталог публичных адресов в `shared/market.ts`, все balances/price читаются RPC. Отчёт, команды local validator и ограничения: [docs/week11.md](docs/week11.md). Публичные [Devnet-данные](docs/week11-devnet-evidence.json) и [браузерные проверки](docs/week11-browser-evidence.json) не содержат секретов.
+
+
+## Неделя 12 — Raydium Swap и безопасная проверка
+
+Во вкладке **DeFi · Raydium** добавлена отдельная форма **Raydium Swap · Devnet**: реальный CPMM-пул, A → B / B → A, on-chain комиссия, quote, slippage, minimum received, проверка свободных ATA, подпись кошельком, отправка, подтверждение и Explorer. Два обмена учебным CLI-кошельком подтверждены в Devnet; интерактивная подпись Phantom отдельно не проверена. Escrow не используется.
+
+Отчёт, подписи транзакций, скриншоты, команды запуска и ограничения: [docs/week12.md](docs/week12.md). Security & Exploit Lab не запускалась и не завершена; всю неделю 12 полностью выполненной считать нельзя.

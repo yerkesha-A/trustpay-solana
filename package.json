@@ -24,7 +24,11 @@
     "deploy:week10:resume": "node scripts/week10-resume.mjs",
     "test:market": "ts-mocha -p tsconfig.json tests/market-math.ts",
     "test:market:devnet": "TRUSTPAY_WEEK11_DEVNET=1 ts-mocha -p tsconfig.json -t 180000 tests/market-devnet.ts",
-    "test:market:browser": "node tests/browser-liquidity.mjs"
+    "test:market:browser": "node tests/browser-liquidity.mjs",
+    "test:swap": "ts-mocha -p tsconfig.json tests/swap.ts",
+    "test:swap:rpc": "node scripts/week12-check.mjs",
+    "test:swap:devnet": "TRUSTPAY_SWAP_DEVNET=1 node scripts/week12-swap-devnet.mjs",
+    "test:swap:browser": "node tests/browser-swap.mjs"
   },
   "dependencies": {
     "@coral-xyz/anchor": "0.31.1",
