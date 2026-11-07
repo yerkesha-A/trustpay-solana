@@ -6,6 +6,7 @@ Escrow-платежи на Solana. Anchor, React, TypeScript и Phantom.
 
 - Создание заказа, депозит SPL-токенов, сдача работы, выплата и согласованный возврат.
 - Депозит и вывод ликвидности Raydium CPMM.
+- Liquidity Vault 1:1 и RPC Dashboard.
 
 ## Запуск
 
@@ -17,8 +18,8 @@ npm run dev -w app
 Настройки сети — в `app/.env.local`, образец — `.env.example`. Используются localnet / Solana Devnet и тестовые SPL-токены.
 
 ```dotenv
-VITE_NETWORK=localnet
-VITE_RPC_URL=http://127.0.0.1:8899
+VITE_NETWORK=devnet
+VITE_RPC_URL=https://api.devnet.solana.com
 VITE_PROGRAM_ID=ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A
 ```
 
@@ -34,5 +35,6 @@ anchor test
 
 - [Escrow](docs/week08.md)
 - [Raydium liquidity](docs/week09.md)
+- [Vault и RPC Dashboard](docs/week10.md)
 
 Escrow не поддерживает арбитраж и автоматический возврат. Отмена требует согласия исполнителя.

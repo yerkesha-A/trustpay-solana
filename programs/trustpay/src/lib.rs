@@ -1,11 +1,23 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Mint, Token, TokenAccount, TransferChecked};
 
+pub mod liquidity;
+pub use liquidity::*;
+
 declare_id!("ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A");
 
 #[program]
 pub mod trustpay {
     use super::*;
+    pub fn initialize_liquidity_vault(ctx: Context<InitializeLiquidityVault>) -> Result<()> {
+        liquidity::initialize(ctx)
+    }
+    pub fn deposit_liquidity(ctx: Context<LiquidityTransfer>, amount: u64) -> Result<()> {
+        liquidity::deposit(ctx, amount)
+    }
+    pub fn withdraw_liquidity(ctx: Context<LiquidityTransfer>, amount: u64) -> Result<()> {
+        liquidity::withdraw(ctx, amount)
+    }
     pub fn create_order(
         ctx: Context<CreateOrder>,
         id: u64,
@@ -185,4 +197,16 @@ pub enum EscrowError {
     InvalidStatus,
     #[msg("Incorrect token recipient")]
     InvalidRecipient,
+    #[msg("Сумма депозита/вывода должна быть больше нуля")]
+    InvalidVaultAmount,
+    #[msg("Недостаточно свободных токенов для депозита")]
+    InsufficientDepositTokens,
+    #[msg("Недостаточно собственных share-токенов для вывода")]
+    InsufficientShares,
+    #[msg("В Liquidity Vault недостаточно токенов")]
+    InsufficientReserve,
+    #[msg("Переполнение или некорректная арифметика Vault")]
+    MathOverflow,
+    #[msg("Резерв Vault не покрывает выпущенные shares")]
+    InvalidVaultBacking,
 }

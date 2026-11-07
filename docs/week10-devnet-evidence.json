@@ -1,0 +1,161 @@
+{
+  "verifiedAt": "2026-11-07T08:34:23.288Z",
+  "network": "devnet",
+  "deployment": {
+    "network": "devnet",
+    "program": "ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A",
+    "programData": "AL8Zf8AtpSwHvJe6nnK9yw3RftFDKCdGpJ6oYrL4N8xF",
+    "binaryBytes": 364248,
+    "sha256": "e15a9a17d5053c4444fa0ba12f0ea4d14538eb4eb2d2a77028018002035d168b",
+    "signature": "3nMVUZsDF3UiXjSwM4EYqvZuAEc2Uwrpon34WEAqoojUFmuEEjd2YUsQaePykuuc2rgvx4j8MYi1u3B6U5s4MwiJ",
+    "resumedOwnedBuffer": true
+  },
+  "tests": {
+    "result": "6 passing (48s)",
+    "mint": "2CLKeMqA9MJxitEwYZi1bXmQx14QXS3gCm5xSHSs5SDf",
+    "vault": "6uua2VhEfHtWJhEkgguChyhj7J8i38gEwHTSRmzsNM3W",
+    "balanceColumns": [
+      "userUnderlying",
+      "userShares",
+      "reserve",
+      "shareSupply"
+    ]
+  },
+  "browser": {
+    "checks": [
+      "real balances",
+      "real CPI deposit/withdraw",
+      "share burn",
+      "auto refresh",
+      "decoded history",
+      "empty state",
+      "mobile",
+      "429 transport fault",
+      "wallet connection label and disconnect"
+    ]
+  },
+  "transactions": [
+    {
+      "operation": "deploy",
+      "signature": "3nMVUZsDF3UiXjSwM4EYqvZuAEc2Uwrpon34WEAqoojUFmuEEjd2YUsQaePykuuc2rgvx4j8MYi1u3B6U5s4MwiJ",
+      "slot": 519599686,
+      "status": "finalized",
+      "err": null,
+      "explorer": "https://explorer.solana.com/tx/3nMVUZsDF3UiXjSwM4EYqvZuAEc2Uwrpon34WEAqoojUFmuEEjd2YUsQaePykuuc2rgvx4j8MYi1u3B6U5s4MwiJ?cluster=devnet"
+    },
+    {
+      "operation": "initialize-vault",
+      "signature": "pnJiy2um41twCRUa93zAauqKQvRFRkB68QQ7BV6A8fy1TC45o9SPnEWDmufTcByNZwkX8VFAbrTNMoR78Axaxs4",
+      "slot": 519599806,
+      "status": "finalized",
+      "err": null,
+      "explorer": "https://explorer.solana.com/tx/pnJiy2um41twCRUa93zAauqKQvRFRkB68QQ7BV6A8fy1TC45o9SPnEWDmufTcByNZwkX8VFAbrTNMoR78Axaxs4?cluster=devnet"
+    },
+    {
+      "operation": "create-escrow",
+      "signature": "9B4nWPte7uFtfFrSpuiFJmLus5mS1kizZT5xXTpU9XEVXuUsB3WcD4ioCaK7wER6ReYASwjN8cTR2DTycj8GFi3",
+      "slot": 519600357,
+      "status": "finalized",
+      "err": null,
+      "explorer": "https://explorer.solana.com/tx/9B4nWPte7uFtfFrSpuiFJmLus5mS1kizZT5xXTpU9XEVXuUsB3WcD4ioCaK7wER6ReYASwjN8cTR2DTycj8GFi3?cluster=devnet"
+    },
+    {
+      "operation": "deposit",
+      "signature": "3Snv3g5rRe1TTGPEunMvS1zR5dBhyNsCfEiXpRApKKqvR9rHANbwCsFCa71PkdeeRY3TfDPjdJdWcnrK2VbaE5Rq",
+      "before": [
+        "8967000000",
+        "12000000",
+        "12000000",
+        "12000000"
+      ],
+      "after": [
+        "8957000000",
+        "22000000",
+        "22000000",
+        "22000000"
+      ],
+      "slot": 519600374,
+      "status": "finalized",
+      "err": null,
+      "explorer": "https://explorer.solana.com/tx/3Snv3g5rRe1TTGPEunMvS1zR5dBhyNsCfEiXpRApKKqvR9rHANbwCsFCa71PkdeeRY3TfDPjdJdWcnrK2VbaE5Rq?cluster=devnet"
+    },
+    {
+      "operation": "withdraw",
+      "signature": "BZW56iBt9xw72Ss96EKbFrRtvftJuyLYaprEasatmtsGi9xSFgAX5CUwRz6Fi2BYn4Xs6MycWueEVL6YrbnXLkd",
+      "before": [
+        "8957000000",
+        "22000000",
+        "22000000",
+        "22000000"
+      ],
+      "after": [
+        "8961000000",
+        "18000000",
+        "18000000",
+        "18000000"
+      ],
+      "slot": 519600394,
+      "status": "finalized",
+      "err": null,
+      "explorer": "https://explorer.solana.com/tx/BZW56iBt9xw72Ss96EKbFrRtvftJuyLYaprEasatmtsGi9xSFgAX5CUwRz6Fi2BYn4Xs6MycWueEVL6YrbnXLkd?cluster=devnet"
+    },
+    {
+      "operation": "withdraw-all",
+      "signature": "48H2P3bsrd1b1QQ7B5mv3Ct7jWg22eLcK9y1B1Nz5ci3BKrDasGczcz95WaFv7TekXrrxoxUoDFETKEd3WD7zDdb",
+      "before": [
+        "8961000000",
+        "18000000",
+        "18000000",
+        "18000000"
+      ],
+      "after": [
+        "8979000000",
+        "0",
+        "0",
+        "0"
+      ],
+      "slot": 519600433,
+      "status": "finalized",
+      "err": null,
+      "explorer": "https://explorer.solana.com/tx/48H2P3bsrd1b1QQ7B5mv3Ct7jWg22eLcK9y1B1Nz5ci3BKrDasGczcz95WaFv7TekXrrxoxUoDFETKEd3WD7zDdb?cluster=devnet"
+    },
+    {
+      "operation": "submit-escrow",
+      "signature": "5BpdjQwGYvuAX9BGSx7LXPh9UsbmMM9E8xPwKpskDxZhb1yaNiQRVVfLeahUYKPgi4q4hUtX7Enq3b9RMZwyvfd3",
+      "slot": 519600451,
+      "status": "finalized",
+      "err": null,
+      "explorer": "https://explorer.solana.com/tx/5BpdjQwGYvuAX9BGSx7LXPh9UsbmMM9E8xPwKpskDxZhb1yaNiQRVVfLeahUYKPgi4q4hUtX7Enq3b9RMZwyvfd3?cluster=devnet"
+    },
+    {
+      "operation": "release-escrow",
+      "signature": "5zDG4QnQ7R5wkwC3eyvTTJPt5FJmt4FrvnNbjvqLpUZqNC6D16kkGJLM6zMtxZgVYZ1AixZzjvy5AqkcN9sM7yQ6",
+      "slot": 519600461,
+      "status": "finalized",
+      "err": null,
+      "explorer": "https://explorer.solana.com/tx/5zDG4QnQ7R5wkwC3eyvTTJPt5FJmt4FrvnNbjvqLpUZqNC6D16kkGJLM6zMtxZgVYZ1AixZzjvy5AqkcN9sM7yQ6?cluster=devnet"
+    },
+    {
+      "operation": "dashboard-deposit",
+      "url": "https://explorer.solana.com/tx/4Joc8ujioJNWhwE2oGFJLZiQA3b2yAhAQjeZBuGbf6c7vr1HmBfEczycsGXrPNsqsFGnqjpSStTqaz7oRX24BAyz?cluster=devnet",
+      "sharesBefore": "0",
+      "sharesAfter": "2500000",
+      "signature": "4Joc8ujioJNWhwE2oGFJLZiQA3b2yAhAQjeZBuGbf6c7vr1HmBfEczycsGXrPNsqsFGnqjpSStTqaz7oRX24BAyz",
+      "slot": 519600935,
+      "status": "finalized",
+      "err": null,
+      "explorer": "https://explorer.solana.com/tx/4Joc8ujioJNWhwE2oGFJLZiQA3b2yAhAQjeZBuGbf6c7vr1HmBfEczycsGXrPNsqsFGnqjpSStTqaz7oRX24BAyz?cluster=devnet"
+    },
+    {
+      "operation": "dashboard-withdraw",
+      "url": "https://explorer.solana.com/tx/5JvfArjWxKkjHL5J5FfGrhrW28FCCPBevGvCbLaHUhhACx4owTRpVq53E8sCitGaKX6t1heVdZC9zedsWphT1e9f?cluster=devnet",
+      "sharesBefore": "2500000",
+      "sharesAfter": "1500000",
+      "signature": "5JvfArjWxKkjHL5J5FfGrhrW28FCCPBevGvCbLaHUhhACx4owTRpVq53E8sCitGaKX6t1heVdZC9zedsWphT1e9f",
+      "slot": 519601071,
+      "status": "finalized",
+      "err": null,
+      "explorer": "https://explorer.solana.com/tx/5JvfArjWxKkjHL5J5FfGrhrW28FCCPBevGvCbLaHUhhACx4owTRpVq53E8sCitGaKX6t1heVdZC9zedsWphT1e9f?cluster=devnet"
+    }
+  ]
+}
