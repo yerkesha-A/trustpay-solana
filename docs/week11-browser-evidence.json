@@ -1,0 +1,22 @@
+{
+  "network": "devnet",
+  "verifiedAt": "2026-11-07T15:29:50.776Z",
+  "transactionsSent": 0,
+  "testWalletProvider": true,
+  "manualPhantom": false,
+  "checks": [
+    "real CPMM reserves and quote",
+    "real CLMM sqrt price and tick-aligned allocation",
+    "invalid range rejected and stale quotes cleared",
+    "wrong protocol rejected",
+    "position button disabled and limitation shown",
+    "real wallet balances",
+    "390px mobile without overflow",
+    "429 transport fault handled",
+    "wallet disconnect clears state"
+  ],
+  "pools": [
+    "8biZWzVLXx9AC5N2c3mJjbeGLGMRJzuDksCSibnvHsB3",
+    "14gmqbdnjAFyRi1Vg3B7Fe6JGMut4CjbABXY1HqfvJnk"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "network": "devnet",
+  "verifiedAt": "2026-11-07T15:32:52.604Z",
+  "transactionsSent": 0,
+  "cpmm": {
+    "address": "8biZWzVLXx9AC5N2c3mJjbeGLGMRJzuDksCSibnvHsB3",
+    "mintA": "2CLKeMqA9MJxitEwYZi1bXmQx14QXS3gCm5xSHSs5SDf",
+    "mintB": "2pybmyQorJG1CvyZ8eZMKgUca9BGAkze1MzQx6fR81wW",
+    "reserveA": "1006000000",
+    "reserveB": "1006000000",
+    "feeRateMillionths": "2500",
+    "slot": 519706215,
+    "forward": {
+      "input": "1000000",
+      "fee": "2500",
+      "output": "996511",
+      "minimum": "991528",
+      "executionPrice": "0.996511",
+      "priceImpactPercent": "0.0991478696742",
+      "spot": "1"
+    },
+    "reverse": {
+      "input": "1000000",
+      "fee": "2500",
+      "output": "996511",
+      "minimum": "991528",
+      "executionPrice": "0.996511",
+      "priceImpactPercent": "0.0991478696742",
+      "spot": "1"
+    }
+  },
+  "clmm": {
+    "mintBAuthority": "5kk4mgeecS4AAvH5U8vAs4jiLGQhPrquBB5rBiTNKJML",
+    "projectControlsMintB": false,
+    "program": "DRayAUgENGQBKVaX8owNhgzkEDyoHTGVEGHVJT1E9pfH",
+    "address": "14gmqbdnjAFyRi1Vg3B7Fe6JGMut4CjbABXY1HqfvJnk",
+    "config": "CD4aJtX11cqTCAc83nxSPkkh5JW2yjD6uwHeovjqQ1qu",
+    "mintA": "So11111111111111111111111111111111111111112",
+    "mintB": "3wDgHUZZP18GwMVTmbNZZ8nYmdJueu3ChN6acvs9nuKP",
+    "vaultA": "3ohKuEQmSiCTsqRwFPSBAWz1uzoewjdHoVb6Rc9JwFHb",
+    "vaultB": "9st5QsZvmU2obaCabe5c3bze3MFdVanWJbH5b416BUC6",
+    "reserveA": "4000000000",
+    "reserveB": "4000000000",
+    "liquidity": "4000000000",
+    "sqrtPriceX64": "18446744073709551616",
+    "tickCurrent": 0,
+    "tickSpacing": 60,
+    "price": "1",
+    "feeRateMillionths": 2500,
+    "slot": 519706217,
+    "range": {
+      "tickLower": -1080,
+      "tickUpper": 960,
+      "lowerPrice": "0.89763244330945058506",
+      "upperPrice": "1.1007537807153331814",
+      "liquidity": "19023943985",
+      "amountA": "891536695",
+      "amountB": "1000000000",
+      "unusedA": "108463305",
+      "unusedB": "0",
+      "active": true,
+      "potentialSharePercent": "82.6267819162"
+    },
+    "projectWalletTokenBalances": [
+      "0",
+      "0"
+    ],
+    "positionOpened": false,
+    "limitation": "Read-only integration and range calculations. Project wallet has no funded pair for an in-range position; open/close position path is not implemented or claimed tested."
+  },
+  "wallet": {
+    "address": "8uctBg6jVu2Y1bTKojWjn1K3dSkBGXGVRCxXPyF9DnMM",
+    "solLamports": "1442947320",
+    "warnings": []
+  },
+  "wrongProtocolRejected": true
+}

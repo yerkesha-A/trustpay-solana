@@ -7,6 +7,7 @@ Escrow-платежи на Solana. Anchor, React, TypeScript и Phantom.
 - Создание заказа, депозит SPL-токенов, сдача работы, выплата и согласованный возврат.
 - Депозит и вывод ликвидности Raydium CPMM.
 - Liquidity Vault 1:1 и RPC Dashboard.
+- Расчёты AMM и диапазонов CLMM.
 
 ## Запуск
 
@@ -36,5 +37,6 @@ anchor test
 - [Escrow](docs/week08.md)
 - [Raydium liquidity](docs/week09.md)
 - [Vault и RPC Dashboard](docs/week10.md)
+- [AMM / CLMM](docs/week11.md)
 
 Escrow не поддерживает арбитраж и автоматический возврат. Отмена требует согласия исполнителя.

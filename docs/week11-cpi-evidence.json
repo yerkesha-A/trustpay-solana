@@ -1,0 +1,101 @@
+{
+  "network": "localnet",
+  "transactions": [
+    {
+      "operation": "initialize",
+      "signature": "3hzZCopefgJ4dAD6j5w9CT64Gy8fjDnKdA9E2GczCSvZ2vb4Q3MFJ2D5AAtjTm6k5sfe4yzyKkEFsXtdRjU8Gj5M",
+      "innerProgramIds": [
+        "11111111111111111111111111111111",
+        "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+      ],
+      "logs": [
+        "Program ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A invoke [1]",
+        "Program log: Instruction: InitializeLiquidityVault",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program log: Instruction: InitializeMint2",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 2780 of 182948 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program log: Instruction: InitializeAccount3",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4214 of 170321 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program data: 2ClAoekeBgSRPNeljE7C5of7Vj+Ac0uBQgK44yDRINbNttqocuj5UkQLF2P4fzNV56fD73r6lwXCKZtqi87Jg1pcZkdshFUcqY+8MPXix++HD23lx7NkXuxQO92VEU3vxd5nsMbp8eI=",
+        "Program ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A consumed 36904 of 200000 compute units",
+        "Program ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A success"
+      ]
+    },
+    {
+      "operation": "ata-and-deposit",
+      "signature": "BY7Zu78Rx5Qajc23dMYzY8GTUWRDqgUVJN8niZZxhyCCje39QoxGBPdPz5tuP3PhWh13AijRU8fmJL6ASSaqcAf",
+      "innerProgramIds": [
+        "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "11111111111111111111111111111111"
+      ],
+      "logs": [
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+        "Program log: CreateIdempotent",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program log: Instruction: GetAccountDataSize",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 1595 of 394597 compute units",
+        "Program return: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA pQAAAAAAAAA=",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program log: Initialize the associated token account",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program log: Instruction: InitializeImmutableOwner",
+        "Program log: Please upgrade to SPL Token 2022 for immutable owner support",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 1405 of 387984 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program log: Instruction: InitializeAccount3",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4214 of 384103 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 20394 of 400000 compute units",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+        "Program ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A invoke [1]",
+        "Program log: Instruction: DepositLiquidity",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program log: Instruction: TransferChecked",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 6174 of 362789 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program log: Instruction: MintTo",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4492 of 354146 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program data: 2ptKwTtCXnqRPNeljE7C5of7Vj+Ac0uBQgK44yDRINbNttqocuj5UpoLwEJUNfxV32Yr9MSX9x1unkvMGOM9VztNbkIBSenRRAsXY/h/M1Xnp8PvevqXBcIpm2qLzsmDWlxmR2yEVRzAxi0AAAAAAMDGLQAAAAAA",
+        "Program ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A consumed 30696 of 379606 compute units",
+        "Program ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A success"
+      ]
+    },
+    {
+      "operation": "withdraw",
+      "signature": "3LsXWRxFJGGtnXisQbRWGAtsfTx3Aam7gjpFN6TyheqSakY9oP3ZWo7JD7AMoW8wuzJhZPtK39YJVefgmy36JS2J",
+      "innerProgramIds": [
+        "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+      ],
+      "logs": [
+        "Program ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A invoke [1]",
+        "Program log: Instruction: WithdrawLiquidity",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program log: Instruction: Burn",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4707 of 183476 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program log: Instruction: TransferChecked",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 6174 of 176042 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program data: 8HhJi5of2kSRPNeljE7C5of7Vj+Ac0uBQgK44yDRINbNttqocuj5UpoLwEJUNfxV32Yr9MSX9x1unkvMGOM9VztNbkIBSenRRAsXY/h/M1Xnp8PvevqXBcIpm2qLzsmDWlxmR2yEVRxAQg8AAAAAAEBCDwAAAAAA",
+        "Program ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A consumed 30886 of 200000 compute units",
+        "Program ojfaRp5p9b8ZyK5VH5VQQQYxTWy8hi3QTorcTHtN19A success"
+      ]
+    }
+  ],
+  "verification": "Four composability tests passed on the local validator. Signatures refer to this local ledger only, not Devnet."
+}
