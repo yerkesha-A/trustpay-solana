@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { Connection, PublicKey } from "@solana/web3.js";
+import { requestWalletSignature } from "../../shared/wallet-signing";
 import { utils } from "@coral-xyz/anchor";
 import { formatUnits, parseUnits } from "../../shared/defi";
 import { MARKET_POOLS, loadAmmMarket, type AmmMarket } from "../../shared/market";
@@ -28,7 +29,7 @@ export default function SwapPanel({ connection }: { connection: Connection }) {
   }
   async function run(action: () => Promise<void>) {
     setBusy(true); setError(""); setNotice("");
-    try { await action(); } catch (e) { setError(String(e)); } finally { setBusy(false); }
+    try { await action(); } catch (e) { setError(String(e)); setNotice(""); } finally { setBusy(false); }
   }
   async function execute() {
     if (!wallet || !quote) return;
@@ -36,9 +37,8 @@ export default function SwapPanel({ connection }: { connection: Connection }) {
     setQuote(null); setSignature("");
     const tx = await buildSwapTransaction(connection, wallet.publicKey, approved);
     const block = await connection.getLatestBlockhash("confirmed");
-    tx.feePayer = wallet.publicKey; tx.recentBlockhash = block.blockhash;
     setNotice("Подтвердите обмен тестовых токенов в кошельке…");
-    const signed = await wallet.signTransaction(tx);
+    const signed = await requestWalletSignature(wallet, tx, block.blockhash);
     validateSwapApproval(approved, wallet.publicKey);
     if (!signed.signature) throw Error("Подпись отсутствует.");
     setSignature(utils.bytes.bs58.encode(signed.signature));

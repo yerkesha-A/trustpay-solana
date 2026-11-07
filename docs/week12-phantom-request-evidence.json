@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-11-07T16:50:06.485Z",
+  "status": "adapter request and rejection passed",
+  "provider": "synthetic, no real extension",
+  "requests": 1,
+  "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+  "feePayerChecked": true,
+  "blockhashChecked": true,
+  "inputAndMinimumChecked": true,
+  "walletATAsChecked": true,
+  "manualPhantomApproval": "not verified",
+  "transactionsSent": 0
+}

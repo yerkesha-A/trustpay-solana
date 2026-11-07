@@ -28,7 +28,12 @@
     "test:swap": "ts-mocha -p tsconfig.json tests/swap.ts",
     "test:swap:rpc": "node scripts/week12-check.mjs",
     "test:swap:devnet": "TRUSTPAY_SWAP_DEVNET=1 node scripts/week12-swap-devnet.mjs",
-    "test:swap:browser": "node tests/browser-swap.mjs"
+    "test:swap:browser": "node tests/browser-swap.mjs",
+    "build:security": "node scripts/week12-build-lab.mjs",
+    "test:security": "node tests/security-lab.mjs",
+    "test:unit": "ts-mocha -p tsconfig.json tests/defi-math.ts tests/market-math.ts tests/rpc.ts tests/swap.ts tests/wallet-signing.ts",
+    "test:phantom:request": "node tests/phantom-request.mjs",
+    "verify:swap": "node scripts/week12-verify-swaps.mjs"
   },
   "dependencies": {
     "@coral-xyz/anchor": "0.31.1",
