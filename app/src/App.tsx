@@ -31,6 +31,7 @@ import { getMint } from "@solana/spl-token";
 import type { ConfirmedSignatureInfo } from "@solana/web3.js";
 import RpcSectionBoundary from "./RpcSectionBoundary";
 const RpcDashboard = lazy(() => import("./RpcDashboard"));
+const LiquidityPanel = lazy(() => import("./LiquidityPanel"));
 const DeFiPanel = lazy(() => import("./DeFiPanel"));
 const labels: Record<string, string> = {
   funded: "В работе",
@@ -41,9 +42,9 @@ const labels: Record<string, string> = {
 };
 export default function App() {
   const wallet = useAnchorWallet();
-  const [view, setView] = useState<"projects" | "defi" | "dashboard">(
-    "projects",
-  );
+  const [view, setView] = useState<
+    "projects" | "defi" | "dashboard" | "liquidity"
+  >("projects");
   const [role, setRole] = useState<"client" | "freelancer">("client"),
     [orders, setOrders] = useState<Order[]>([]),
     [decimals, setDecimals] = useState<Record<string, number>>({});
@@ -202,6 +203,12 @@ export default function App() {
           <ArrowUpRight size={19} /> DeFi · Raydium <span>↗</span>
         </button>
         <button
+          className={view === "liquidity" ? "nav active" : "nav"}
+          onClick={() => setView("liquidity")}
+        >
+          <ArrowUpRight size={19} /> DeFi / Liquidity <span>↗</span>
+        </button>
+        <button
           className={view === "dashboard" ? "nav active" : "nav"}
           onClick={() => setView("dashboard")}
         >
@@ -225,11 +232,13 @@ export default function App() {
         <header>
           <div className="breadcrumb">
             Workspace <span>/</span>{" "}
-            {view === "dashboard"
-              ? "RPC Dashboard"
-              : view === "defi"
-                ? "DeFi · Raydium"
-                : "Обзор проектов"}
+            {view === "liquidity"
+              ? "DeFi / Liquidity"
+              : view === "dashboard"
+                ? "RPC Dashboard"
+                : view === "defi"
+                  ? "DeFi · Raydium"
+                  : "Обзор проектов"}
           </div>
           <div className="header-actions">
             <button
@@ -247,8 +256,20 @@ export default function App() {
             <button onClick={() => setView("projects")}>Проекты</button>
             <button onClick={() => setView("defi")}>DeFi · Raydium</button>
             <button onClick={() => setView("dashboard")}>RPC Dashboard</button>
+            <button onClick={() => setView("liquidity")}>
+              DeFi / Liquidity
+            </button>
           </div>
-          {view === "dashboard" ? (
+          {view === "liquidity" ? (
+            <RpcSectionBoundary key="liquidity">
+              <Suspense fallback={<p>Загрузка Liquidity…</p>}>
+                <LiquidityPanel
+                  key={wallet?.publicKey.toBase58() || "disconnected"}
+                  onLp={() => setView("defi")}
+                />
+              </Suspense>
+            </RpcSectionBoundary>
+          ) : view === "dashboard" ? (
             <RpcSectionBoundary key="dashboard">
               <Suspense fallback={<p>Загрузка RPC Dashboard…</p>}>
                 <RpcDashboard

@@ -1233,3 +1233,19 @@ footer span:last-child {
     flex-wrap: wrap;
   }
 }
+
+/* Week 11: real AMM/CLMM reading and range planning. */
+.market-catalog {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding:24px;}
+.market-choice {text-align:left;border:1px solid var(--line);border-radius:10px;padding:18px;background:var(--paper);color:inherit;min-width:0;}
+.market-choice.selected {border-color:var(--green);background:var(--soft);}
+.market-choice span {font-size:10px;color:var(--green);letter-spacing:1px;}
+.market-choice strong,.market-choice small {display:block;margin-top:9px;}
+.market-choice strong {font-size:13px;}.market-choice small {color:var(--muted);font-size:10px;overflow-wrap:anywhere;}
+.market-help {font-size:11px;color:var(--muted);line-height:1.7;margin:12px 24px;overflow-wrap:anywhere;}
+.liquidity-page select {display:block;width:100%;margin-top:8px;padding:12px;border:1px solid var(--line);border-radius:7px;color:inherit;background:var(--paper);}
+.liquidity-page .market-price {font-size:22px;font-weight:700;overflow-wrap:anywhere;}
+.liquidity-page .defi-quote p,.market-limitation p {font-size:12px;line-height:1.8;color:var(--muted);}
+.liquidity-page .defi-quote dd {overflow-wrap:anywhere;min-width:0;}
+.market-limitation {padding:24px;border-top:1px solid var(--line);}.market-limitation strong {font-size:13px;}
+.range-track {display:flex;justify-content:space-between;gap:12px;padding:18px;background:var(--paper);border-radius:8px;flex-wrap:wrap;font-size:12px;}
+@media(max-width:700px) {.market-catalog {grid-template-columns:1fr;}.liquidity-page .section-heading {flex-wrap:wrap;gap:14px;}.liquidity-page .pool-form,.liquidity-page .liquidity-form {flex-direction:column;align-items:stretch;}.liquidity-page .defi-assets {grid-template-columns:1fr;}.liquidity-page .pool-form label {min-width:0;}.liquidity-page .defi-quote dl>div {flex-direction:column;gap:6px;}.liquidity-page .defi-quote dd {margin:0;}.mobile-sections {flex-wrap:wrap;}}

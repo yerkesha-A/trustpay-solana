@@ -1,6 +1,6 @@
 # TrustPay — Decentralized Freelance Escrow
 
-Университетский проект на Solana. Реализованы **недели 8–10**: escrow MVP и реальная DeFi-интеграция Raydium CPMM, проверенная на Devnet. Неделя 10: изолированный Liquidity Vault 1:1 и RPC Dashboard, проверенные реальными Devnet-транзакциями. Недели 11–15 ожидают отдельного разрешения. Только Localnet / Devnet и тестовые SPL-токены. Mainnet не используется.
+Университетский проект на Solana. Реализованы **недели 8–11**: escrow MVP и реальная DeFi-интеграция Raydium CPMM, проверенная на Devnet. Неделя 10: изолированный Liquidity Vault 1:1 и RPC Dashboard, проверенные реальными Devnet-транзакциями. Неделя 11 добавляет AMM/CLMM-аналитику и проверку композиции CPI. Недели 12–15 ожидают отдельного разрешения. Только Localnet / Devnet и тестовые SPL-токены. Mainnet не используется.
 
 ## Архитектура
 
@@ -151,3 +151,18 @@ npm run test:dashboard:devnet
 ```
 
 Нужен работающий Vite для браузерных тестов. Локальный UI-тест: `npm run test:dashboard:local` после local-validator contract suite. Все команды, реальные результаты и ограничения: [docs/week10.md](docs/week10.md). Push недели 10 — только после отдельного подтверждения пользователя.
+
+## Неделя 11 — AMM / CLMM и композиция CPI
+
+Раздел **DeFi / Liquidity** читает настоящие CPMM и CLMM Raydium Devnet-пулы: пара mint, резервы, on-chain комиссия, цена, балансы кошелька. AMM-калькулятор показывает output, slippage и price impact; CLMM-калькулятор выравнивает диапазон по ticks и вычисляет A/B, L, остаток бюджета и потенциальную долю активной L. Реальные LP-депозит/вывод сохранены в DeFi · Raydium. CLMM здесь **только чтение и расчёт**: у проектного кошелька нет токенов выбранной пары, открытие/закрытие позиции не реализовано и не объявляется проверенным.
+
+Новые локальные тесты проверяют реальные System/Token CPI при init, композицию ATA + deposit и атомарный rollback при чужом share account. Rust/IDL недели 10 сохранены; новый deploy не нужен.
+
+```sh
+npm run test:market
+npm run test:market:devnet
+# При работающем Vite:
+npm run test:market:browser
+```
+
+Сеть задаётся существующим `VITE_DEFI_RPC_URL` (Devnet/Helius Devnet); каталог публичных адресов в `shared/market.ts`, все balances/price читаются RPC. Отчёт, команды local validator и ограничения: [docs/week11.md](docs/week11.md). Публичные [Devnet-данные](docs/week11-devnet-evidence.json) и [браузерные проверки](docs/week11-browser-evidence.json) не содержат секретов.
